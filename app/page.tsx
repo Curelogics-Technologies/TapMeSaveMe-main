@@ -41,13 +41,13 @@ export default function HomePage() {
       </section>
 
       {/* Affiliate Call-to-Action */}
-      <section className="bg-gray-100 py-4 sm:py-6">
+      <section className="bg-black py-4 sm:py-6">
         <div className="container mx-auto px-3 sm:px-4 lg:px-8 text-center">
           <div className="max-w-3xl mx-auto">
             <Button
               variant="outline"
               size="lg"
-              className="border-emergency-red text-emergency-red hover:bg-emergency-red hover:text-white bg-white px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base"
+              className="border-emergency-red text-emergency-red hover:bg-emergency-red hover:text-white bg-black px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base"
               asChild
             >
               <Link href="/affiliate">
