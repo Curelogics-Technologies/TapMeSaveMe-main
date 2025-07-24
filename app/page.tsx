@@ -47,7 +47,7 @@ export default function HomePage() {
             <Button
               variant="outline"
               size="lg"
-              className="border-emergency-red text-emergency-red hover:bg-emergency-red hover:text-white bg-black px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base"
+              className="border-gray-100 text-gray-100 hover:bg-gray-100 hover:text-black bg-black px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base"
               asChild
             >
               <Link href="/affiliate">
