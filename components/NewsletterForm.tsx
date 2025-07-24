@@ -1,275 +1,149 @@
-// "use client"
-
-// import { useEffect } from "react"
-
-// export function NewsletterForm() {
-//   useEffect(() => {
-//     // Load Mailchimp scripts only on the client side
-//     const script1 = document.createElement("script")
-//     script1.src = "https://code.jquery.com/jquery-3.6.0.min.js"
-//     script1.async = true
-//     document.body.appendChild(script1)
-
-//     const script2 = document.createElement("script")
-//     script2.src = "//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"
-//     script2.async = true
-//     document.body.appendChild(script2)
-
-//     const script3 = document.createElement("script")
-//     script3.innerHTML = `
-//       (function($) {
-//         window.fnames = new Array();
-//         window.ftypes = new Array();
-//         fnames[0]='EMAIL';ftypes[0]='email';
-//         fnames[1]='FNAME';ftypes[1]='text';
-//         fnames[2]='LNAME';ftypes[2]='text';
-//         fnames[3]='ADDRESS';ftypes[3]='address';
-//         fnames[4]='PHONE';ftypes[4]='phone';
-//         fnames[5]='BIRTHDAY';ftypes[5]='birthday';
-//         fnames[6]='COMPANY';ftypes[6]='text';
-//         fnames[7]='MMERGE7';ftypes[7]='date';
-//         $(document).ready(function() {
-//           $('#mc-embedded-subscribe-form').on('submit', function(e) {
-//             e.preventDefault();
-//             const form = $(this);
-//             const url = form.attr('action').replace('/post?', '/post-json?') + '&c=?';
-//             const data = form.serialize();
-//             $.ajax({
-//               url: url,
-//               type: 'GET',
-//               data: data,
-//               dataType: 'jsonp',
-//               contentType: 'application/json; charset=utf-8',
-//               success: function(resp) {
-//                 const successMessage = $('#mce-success-response');
-//                 const errorMessage = $('#mce-error-response');
-//                 successMessage.hide();
-//                 errorMessage.hide();
-//                 if (resp.result === 'success') {
-//                   successMessage.text('Email subscribed successfully').show();
-//                   form[0].reset();
-//                 } else {
-//                   errorMessage.text(resp.msg || 'Please enter a valid email').show();
-//                 }
-//               },
-//               error: function() {
-//                 $('#mce-error-response').text('An error occurred. Please try again.').show();
-//               }
-//             });
-//           });
-//         });
-//       })(jQuery);
-//       var $mcj = jQuery.noConflict(true);
-//     `
-//     document.body.appendChild(script3)
-
-//     // Cleanup scripts on component unmount
-//     return () => {
-//       document.body.removeChild(script1)
-//       document.body.removeChild(script2)
-//       document.body.removeChild(script3)
-//     }
-//   }, [])
-
-//   return (
-//     <div className="max-w-md mx-auto">
-//       <form
-//         action="https://tapmesaveme.us1.list-manage.com/subscribe/post-json?u=661a5be8a60462f3b7431a783&id=4e4eb6f787&f_id=007887e5f0"
-//         method="post"
-//         id="mc-embedded-subscribe-form"
-//         name="mc-embedded-subscribe-form"
-//         className="validate"
-//       >
-//         <div id="mc_embed_signup_scroll">
-//           <div className="mc-field-group flex flex-row gap-2 items-center">
-//             <div className="flex-1">
-//               <label htmlFor="mce-EMAIL" className="text-sm font-semibold text-dark-gray flex items-center space-x-2">
-//                 <span>Email Address <span className="text-emergency-red">*</span></span>
-//               </label>
-//               <input
-//                 type="email"
-//                 name="EMAIL"
-//                 className="required email mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-emergency-red focus:ring-emergency-red focus:ring-opacity-50 text-sm py-2 px-3"
-//                 id="mce-EMAIL"
-//                 required
-//                 placeholder="Enter your email"
-//               />
-//             </div>
-//             <div className="clear">
-//               <input
-//                 type="submit"
-//                 name="subscribe"
-//                 id="mc-embedded-subscribe"
-//                 className="bg-emergency-red hover:bg-emergency-red/90 text-white font-semibold py-2 px-4 rounded-md text-sm cursor-pointer mt-6"
-//                 value="Subscribe"
-//               />
-//             </div>
-//           </div>
-//           <div id="mce-responses" className="mt-2">
-//             <div className="response text-sm text-red-500" id="mce-error-response" style={{ display: "none" }}></div>
-//             <div className="response text-sm text-green-500" id="mce-success-response" style={{ display: "none" }}></div>
-//           </div>
-//           <div aria-hidden="true" style={{ position: "absolute", left: "-5000px" }}>
-//             <input type="text" name="b_661a5be8a60462f3b7431a783_4e4eb6f787" tabIndex={-1} value="" />
-//           </div>
-//         </div>
-//       </form>
-//     </div>
-//   )
-// }
-
-
 "use client"
 
-import { useEffect, useState } from "react"
+import { useState, FormEvent } from "react"
 
-declare global {
-  interface Window {
-    setEmail?: React.Dispatch<React.SetStateAction<string>>;
-    setIsLoading?: React.Dispatch<React.SetStateAction<boolean>>;
-  }
+interface NewsletterFormProps {
+  textColor?: string
+  labelColor?: string
+  placeholderStyle?: string
+  inputBorderColor?: string
+  buttonStyle?: string
 }
 
-export function NewsletterForm() {
+export function NewsletterForm({ 
+  textColor = "text-dark-gray",
+  labelColor = "text-dark-gray", 
+  placeholderStyle = "placeholder-gray-500",
+  inputBorderColor = "border-gray-300 focus:border-emergency-red",
+  buttonStyle = "bg-emergency-red hover:bg-emergency-red/90"
+}: NewsletterFormProps) {
   const [email, setEmail] = useState("")
-  const [isLoading, setIsLoading] = useState(false)
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+  const [message, setMessage] = useState("")
 
-  useEffect(() => {
-    const loadScript = (src: string): Promise<void> => {
-      return new Promise((resolve, reject) => {
-        const script = document.createElement("script")
-        script.src = src
-        script.async = true
-        script.onload = () => resolve()
-        script.onerror = () => reject(new Error(`Failed to load script: ${src}`))
-        document.body.appendChild(script)
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    
+    if (!email || !email.includes('@')) {
+      setStatus('error')
+      setMessage('Please enter a valid email address')
+      return
+    }
+
+    setStatus('loading')
+    setMessage('')
+
+    try {
+      // Convert the POST URL to JSONP URL for CORS bypass
+      const baseUrl = 'https://tapmesaveme.us1.list-manage.com/subscribe/post-json'
+      const params = new URLSearchParams({
+        u: '661a5be8a60462f3b7431a783',
+        id: '4e4eb6f787',
+        EMAIL: email,
+        c: 'mailchimpCallback' // JSONP callback name
       })
-    }
 
-    const loadMailchimp = async () => {
-      try {
-        await loadScript("https://code.jquery.com/jquery-3.6.0.min.js")
-        await loadScript("//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js")
+      // Create a unique callback name to avoid conflicts
+      const callbackName = `mailchimpCallback_${Date.now()}`
+      
+      // Create the script element for JSONP
+      const script = document.createElement('script')
+      const timeoutId = setTimeout(() => {
+        cleanup()
+        setStatus('error')
+        setMessage('Request timed out. Please try again.')
+      }, 10000) // 10 second timeout
 
-        const script = document.createElement("script")
-        script.innerHTML = `
-          (function($) {
-            window.fnames = new Array();
-            window.ftypes = new Array();
-            fnames[0]='EMAIL';ftypes[0]='email';
-            fnames[1]='FNAME';ftypes[1]='text';
-            fnames[2]='LNAME';ftypes[2]='text';
-            fnames[3]='ADDRESS';ftypes[3]='address';
-            fnames[4]='PHONE';ftypes[4]='phone';
-            fnames[5]='BIRTHDAY';ftypes[5]='birthday';
-            fnames[6]='COMPANY';ftypes[6]='text';
-            fnames[7]='MMERGE7';ftypes[7]='date';
-            $(document).ready(function() {
-              $('#mc-embedded-subscribe-form').on('submit', function(e) {
-                e.preventDefault();
-                const form = $(this);
-                const url = form.attr('action').replace('/post?', '/post-json?') + '&c=?';
-                const data = form.serialize();
-                window.setIsLoading(true);
-                $.ajax({
-                  url: url,
-                  type: 'GET',
-                  data: data,
-                  dataType: 'jsonp',
-                  contentType: 'application/json; charset=utf-8',
-                  success: function(resp) {
-                    const successMessage = $('#mce-success-response');
-                    const errorMessage = $('#mce-error-response');
-                    successMessage.hide();
-                    errorMessage.hide();
-                    if (resp.result === 'success') {
-                      successMessage.text('Email subscribed successfully').show();
-                      form[0].reset();
-                      window.setEmail('');
-                    } else {
-                      errorMessage.text(resp.msg || 'Please enter a valid email').show();
-                      window.setEmail('');
-                    }
-                    window.setIsLoading(false);
-                  },
-                  error: function() {
-                    $('#mce-error-response').text('An error occurred. Please try again.').show();
-                    window.setEmail('');
-                    window.setIsLoading(false);
-                  }
-                });
-              });
-            });
-          })(jQuery);
-          var $mcj = jQuery.noConflict(true);
-        `
-        document.body.appendChild(script)
-
-        window.setEmail = setEmail
-        window.setIsLoading = setIsLoading
-
-        return () => {
-          document.body.removeChild(script)
-          delete window.setEmail
-          delete window.setIsLoading
+      // Define the cleanup function
+      const cleanup = () => {
+        if (script.parentNode) {
+          script.parentNode.removeChild(script)
         }
-      } catch (error) {
-        console.error("Mailchimp form script load failed", error)
+        delete (window as any)[callbackName]
+        clearTimeout(timeoutId)
       }
-    }
 
-    const cleanup = loadMailchimp()
+      // Define the callback function
+      ;(window as any)[callbackName] = (data: any) => {
+        cleanup()
+        
+        if (data.result === 'success') {
+          setStatus('success')
+          setMessage('Thank you for subscribing! Check your email for confirmation.')
+          setEmail('')
+        } else {
+          setStatus('error')
+          // Clean up Mailchimp's error message
+          let errorMsg = data.msg || 'An error occurred. Please try again.'
+          // Remove the "0 - " prefix that Mailchimp sometimes adds
+          errorMsg = errorMsg.replace(/^\d+\s*-\s*/, '')
+          // Make the message more user-friendly
+          if (errorMsg.includes('already subscribed')) {
+            errorMsg = 'This email is already subscribed to our newsletter.'
+          }
+          setMessage(errorMsg)
+        }
+      }
 
-    return () => {
-      cleanup.then(fn => fn && fn())
+      // Update URL with the unique callback name
+      const finalUrl = `${baseUrl}?${params.toString().replace('mailchimpCallback', callbackName)}`
+      script.src = finalUrl
+      document.body.appendChild(script)
+
+    } catch (error) {
+      setStatus('error')
+      setMessage('An unexpected error occurred. Please try again.')
+      console.error('Newsletter subscription error:', error)
     }
-  }, [setEmail, setIsLoading])
+  }
 
   return (
     <div className="max-w-md mx-auto">
-      <form
-        action="https://tapmesaveme.us1.list-manage.com/subscribe/post-json?u=661a5be8a60462f3b7431a783&id=4e4eb6f787&f_id=007887e5f0"
-        method="post"
-        id="mc-embedded-subscribe-form"
-        name="mc-embedded-subscribe-form"
-        className="validate"
-      >
-        <div id="mc_embed_signup_scroll">
-          <div className="mc-field-group flex flex-row gap-2 items-center">
-            <div className="flex-1">
-              <label htmlFor="mce-EMAIL" className="text-sm font-semibold text-dark-gray flex items-center space-x-2">
-                <span>Email Address <span className="text-emergency-red">*</span></span>
-              </label>
-              <input
-                type="email"
-                name="EMAIL"
-                className="required email mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-emergency-red focus:ring-emergency-red focus:ring-opacity-50 text-sm py-2 px-3"
-                id="mce-EMAIL"
-                required
-                placeholder="Enter your email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-            <div className="clear">
-              <input
-                type="submit"
-                name="subscribe"
-                id="mc-embedded-subscribe"
-                className="bg-emergency-red hover:bg-emergency-red/90 text-white font-semibold py-2 px-4 rounded-md text-sm cursor-pointer mt-6 disabled:opacity-50 disabled:cursor-not-allowed"
-                value="Subscribe"
-                disabled={isLoading}
-              />
-            </div>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-2 items-end">
+          <div className="flex-1 w-full">
+            <label htmlFor="newsletter-email" className={`block text-sm font-semibold ${labelColor} mb-1`}>
+              Email Address <span className="text-emergency-red">*</span>
+            </label>
+            <input
+              type="email"
+              id="newsletter-email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email"
+              className={`w-full rounded-md ${inputBorderColor} ${placeholderStyle} shadow-sm focus:ring-emergency-red focus:ring-opacity-50 text-sm py-2 px-3 disabled:opacity-50 disabled:cursor-not-allowed bg-white text-gray-900`}
+              disabled={status === 'loading'}
+              required
+            />
           </div>
-          <div id="mce-responses" className="mt-2">
-            <div className="response text-sm text-red-500" id="mce-error-response" style={{ display: "none" }}></div>
-            <div className="response text-sm text-green-500" id="mce-success-response" style={{ display: "none" }}></div>
-          </div>
-          <div aria-hidden="true" style={{ position: "absolute", left: "-5000px" }}>
-            <input type="text" name="b_661a5be8a60462f3b7431a783_4e4eb6f787" tabIndex={-1} value="" readOnly />
-          </div>
+          <button
+            type="submit"
+            disabled={status === 'loading' || !email}
+            className={`${buttonStyle} ${textColor} font-semibold py-2 px-6 rounded-md text-sm transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap`}
+          >
+            {status === 'loading' ? 'Subscribing...' : 'Subscribe'}
+          </button>
         </div>
+
+        {/* Status Messages */}
+        {message && (
+          <div className={`text-sm p-3 rounded-md ${
+            status === 'success' 
+              ? 'bg-green-50 text-green-700 border border-green-200' 
+              : status === 'error'
+              ? 'bg-red-50 text-red-700 border border-red-200'
+              : ''
+          }`}>
+            {message}
+          </div>
+        )}
+
+        {/* Loading indicator */}
+        {status === 'loading' && (
+          <div className="flex justify-center">
+            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-emergency-red"></div>
+          </div>
+        )}
       </form>
     </div>
   )

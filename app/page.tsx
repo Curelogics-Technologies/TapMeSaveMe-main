@@ -10,26 +10,50 @@ export default function HomePage() {
   return (
     <div className="min-h-screen">
       {/* Kickstarter Launch Banner */}
-      <section className="bg-emergency-red text-white py-3 sm:py-4">
+      <section className="bg-black text-white py-5 sm:py-7">
         <div className="container mx-auto px-3 sm:px-4 lg:px-8 text-center">
-          <p className="text-lg sm:text-xl font-bold animate-pulse">
+          <p className="text-xl sm:text-2xl lg:text-3xl font-bold animate-pulse">
             🚨 Launching on Kickstarter VERY soon! 🚨
           </p>
         </div>
       </section>
 
       {/* Top Newsletter Section */}
-      <section className="bg-gradient-to-r from-emergency-red/5 to-emergency-red/10 py-8 sm:py-12">
+      <section className="bg-emergency-red py-8 sm:py-12">
         <div className="container mx-auto px-3 sm:px-4 lg:px-8 text-center">
           <div className="max-w-2xl mx-auto animate-slide-up">
-            <h2 className="text-2xl sm:text-3xl font-bold text-dark-gray mb-3 sm:mb-4">
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3 sm:mb-4">
               Get 10% OFF + early access
             </h2>
-            <p className="text-base sm:text-lg text-gray-600 mb-6 sm:mb-8">
+            <p className="text-base sm:text-lg text-white/90 mb-6 sm:mb-8">
               Subscribe now to receive your discount code and be the first to know when we go live on Kickstarter!
             </p>
-            <NewsletterForm />
-            <p className="text-xs sm:text-sm text-gray-500 mt-4">* indicates required</p>
+            <NewsletterForm 
+              textColor="text-red"
+              labelColor="text-white"
+              placeholderStyle="placeholder-gray-300"
+              inputBorderColor="border-white/30 focus:border-white"
+              buttonStyle="bg-white hover:bg-white/90 text-emergency-red"
+            />
+            <p className="text-xs sm:text-sm text-white/70 mt-4">* indicates required</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Affiliate Call-to-Action */}
+      <section className="bg-gray-100 py-4 sm:py-6">
+        <div className="container mx-auto px-3 sm:px-4 lg:px-8 text-center">
+          <div className="max-w-3xl mx-auto">
+            <Button
+              variant="outline"
+              size="lg"
+              className="border-emergency-red text-emergency-red hover:bg-emergency-red hover:text-white bg-white px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base"
+              asChild
+            >
+              <Link href="/affiliate">
+                Want to help spread the word and earn commissions? Click here to join our affiliate team!
+              </Link>
+            </Button>
           </div>
         </div>
       </section>
