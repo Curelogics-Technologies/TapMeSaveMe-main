@@ -39,19 +39,20 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* Affiliate Call-to-Action */}
+ {/* Affiliate Call-to-Action */}
       <section className="bg-black py-4 sm:py-6">
         <div className="container mx-auto px-3 sm:px-4 lg:px-8 text-center">
           <div className="max-w-3xl mx-auto">
             <Button
               variant="outline"
               size="lg"
-              className="border-gray-100 text-gray-100 hover:bg-gray-100 hover:text-black bg-black px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base"
+              className="border-emergency-red text-emergency-red hover:bg-emergency-red hover:text-white bg-white px-4 sm:px-6 lg:px-8 py-3 sm:py-4 text-xs sm:text-sm lg:text-base w-full sm:w-auto"
               asChild
             >
               <Link href="/affiliate">
-                Want to help spread the word and earn commissions? Click here to join our affiliate team!
+                <span className="block sm:hidden">Join Our Affiliate Team!</span>
+                <span className="hidden sm:block lg:hidden">Help spread the word & earn commissions!</span>
+                <span className="hidden lg:block">Want to help spread the word and earn commissions? Click here to join our affiliate team!</span>
               </Link>
             </Button>
           </div>
