@@ -69,7 +69,7 @@ export default function HomePage() {
               <div className="relative max-w-xs mx-auto sm:max-w-sm lg:max-w-md">
                 <div className="absolute inset-0 bg-gradient-to-r from-emergency-red/20 to-transparent rounded-3xl transform rotate-3"></div>
                 <Image
-                  src="/Kids sticker.png?height=450&width=350"
+                  src="/logo.png?height=450&width=350"
                   alt="TapMeSaveMe NFC Tags"
                   width={350}
                   height={450}
