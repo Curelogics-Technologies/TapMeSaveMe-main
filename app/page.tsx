@@ -9,6 +9,31 @@ import { NewsletterForm } from "@/components/NewsletterForm"
 export default function HomePage() {
   return (
     <div className="min-h-screen">
+      {/* Kickstarter Launch Banner */}
+      <section className="bg-emergency-red text-white py-3 sm:py-4">
+        <div className="container mx-auto px-3 sm:px-4 lg:px-8 text-center">
+          <p className="text-lg sm:text-xl font-bold animate-pulse">
+            🚨 Launching on Kickstarter VERY soon! 🚨
+          </p>
+        </div>
+      </section>
+
+      {/* Top Newsletter Section */}
+      <section className="bg-gradient-to-r from-emergency-red/5 to-emergency-red/10 py-8 sm:py-12">
+        <div className="container mx-auto px-3 sm:px-4 lg:px-8 text-center">
+          <div className="max-w-2xl mx-auto animate-slide-up">
+            <h2 className="text-2xl sm:text-3xl font-bold text-dark-gray mb-3 sm:mb-4">
+              Get 10% OFF + early access
+            </h2>
+            <p className="text-base sm:text-lg text-gray-600 mb-6 sm:mb-8">
+              Subscribe now to receive your discount code and be the first to know when we go live on Kickstarter!
+            </p>
+            <NewsletterForm />
+            <p className="text-xs sm:text-sm text-gray-500 mt-4">* indicates required</p>
+          </div>
+        </div>
+      </section>
+
       {/* Hero Section */}
       <section className="relative bg-cool-gray py-4 sm:py-6 lg:py-10 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-cool-gray to-white opacity-50"></div>
