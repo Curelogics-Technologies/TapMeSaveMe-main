@@ -55,7 +55,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      {/* Affiliate Call-to-Action */}
+      {/* Affiliate Call-to-Action*/}
       <section className="bg-black py-4 sm:py-6">
         <div className="container mx-auto px-3 sm:px-4 lg:px-8 text-center">
           <div className="max-w-4xl mx-auto">
