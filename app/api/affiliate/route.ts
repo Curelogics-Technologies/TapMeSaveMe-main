@@ -62,7 +62,7 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: error.detail || "Failed to update subscriber" }, { status: 400 })
       }
     } else if (checkResponse.status === 404) {
-      // Subscriber does not exist, create new subscriber with "Affiliate" tag
+      // Subscriber does not exist, create new subscriber with "Affiliate" 
       const subscribeResponse = await fetch(
         `https://${MAILCHIMP_SERVER_PREFIX}.api.mailchimp.com/3.0/lists/${MAILCHIMP_AUDIENCE_ID}/members`,
         {
