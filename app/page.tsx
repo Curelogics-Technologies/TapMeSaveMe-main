@@ -40,24 +40,24 @@ export default function HomePage() {
         </div>
       </section>
  {/* Affiliate Call-to-Action */}
-      <section className="bg-black py-4 sm:py-6">
-        <div className="container mx-auto px-3 sm:px-4 lg:px-8 text-center">
-          <div className="max-w-3xl mx-auto">
-            <Button
-              variant="outline"
-              size="lg"
-              className="border-emergency-red text-emergency-red hover:bg-emergency-red hover:text-white bg-white px-4 sm:px-6 lg:px-8 py-3 sm:py-4 text-xs sm:text-sm lg:text-base w-full sm:w-auto"
-              asChild
-            >
-              <Link href="/affiliate">
-                <span className="block sm:hidden">Join Our Affiliate Team!</span>
-                <span className="hidden sm:block lg:hidden">Help spread the word & earn commissions!</span>
-                <span className="hidden lg:block">Want to help spread the word and earn commissions? Click here to join our affiliate team!</span>
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </section>
+     <section className="bg-black py-4 sm:py-6">
+  <div className="container mx-auto px-3 sm:px-4 lg:px-8 text-center">
+    <div className="max-w-4xl mx-auto">
+      <Button 
+        variant="outline" 
+        size="lg" 
+        className="border-emergency-red text-emergency-red hover:bg-emergency-red hover:text-white bg-white px-4 sm:px-6 lg:px-8 py-3 sm:py-4 text-xs sm:text-sm lg:text-base w-full transition-colors duration-200 min-h-[3rem] sm:min-h-[3.5rem] lg:min-h-[4rem]" 
+        asChild
+      >
+        <Link href="/affiliate" className="flex items-center justify-center">
+          <span className="leading-tight text-center break-words hyphens-auto whitespace-normal">
+            Want to help spread the word and earn commissions? Click here to join our affiliate team!
+          </span>
+        </Link>
+      </Button>
+    </div>
+  </div>
+</section>
 
       {/* Hero Section */}
       <section className="relative bg-cool-gray py-4 sm:py-6 lg:py-10 overflow-hidden">
