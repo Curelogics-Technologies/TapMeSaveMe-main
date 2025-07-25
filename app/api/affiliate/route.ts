@@ -4,14 +4,11 @@ import crypto from "crypto"
 export async function POST(request: NextRequest) {
   try {
     const formData = await request.json()
-    const { email, firstName, lastName } = formData
+    const { email } = formData
 
-    // Validate inputs
+    // Validate email input
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return NextResponse.json({ error: "Invalid email address" }, { status: 400 })
-    }
-    if (!firstName || !lastName) {
-      return NextResponse.json({ error: "First name and last name are required" }, { status: 400 })
     }
 
     // Mailchimp API details
@@ -20,7 +17,7 @@ export async function POST(request: NextRequest) {
     const MAILCHIMP_SERVER_PREFIX = process.env.MAILCHIMP_SERVER_PREFIX
 
     if (!MAILCHIMP_API_KEY || !MAILCHIMP_AUDIENCE_ID || !MAILCHIMP_SERVER_PREFIX) {
-      console.log("Affiliate signup (demo mode):", { email, firstName, lastName })
+      console.log("Affiliate signup (demo mode):", { email })
       return NextResponse.json({ success: true })
     }
 
@@ -40,7 +37,7 @@ export async function POST(request: NextRequest) {
     )
 
     if (checkResponse.ok) {
-      // Subscriber exists, update merge_fields and add "Affiliate" tag
+      // Subscriber exists, add "Affiliate" tag
       const updateResponse = await fetch(
         `https://${MAILCHIMP_SERVER_PREFIX}.api.mailchimp.com/3.0/lists/${MAILCHIMP_AUDIENCE_ID}/members/${subscriberHash}`,
         {
@@ -52,10 +49,6 @@ export async function POST(request: NextRequest) {
           body: JSON.stringify({
             email_address: email.toLowerCase(),
             status_if_new: "subscribed",
-            merge_fields: {
-              FNAME: firstName,
-              LNAME: lastName,
-            },
             tags: ["Affiliate"],
           }),
         },
@@ -81,10 +74,6 @@ export async function POST(request: NextRequest) {
           body: JSON.stringify({
             email_address: email.toLowerCase(),
             status: "subscribed",
-            merge_fields: {
-              FNAME: firstName,
-              LNAME: lastName,
-            },
             tags: ["Affiliate"],
           }),
         },

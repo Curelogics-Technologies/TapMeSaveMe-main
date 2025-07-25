@@ -6,15 +6,11 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { DollarSign, Users, TrendingUp, Gift, Star, CheckCircle, Mail, User } from "lucide-react"
+import { DollarSign, Users, TrendingUp, Gift, Star, CheckCircle, Mail } from "lucide-react"
 import Image from "next/image"
 
 export default function AffiliatePage() {
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-  })
+  const [email, setEmail] = useState("")
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -30,16 +26,12 @@ export default function AffiliatePage() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ email }),
       })
 
       if (response.ok) {
         setIsSubmitted(true)
-        setFormData({
-          firstName: "",
-          lastName: "",
-          email: "",
-        })
+        setEmail("")
       } else {
         const errorData = await response.json()
         setError(errorData.error || "An error occurred. Please try again.")
@@ -53,10 +45,7 @@ export default function AffiliatePage() {
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.id]: e.target.value,
-    }))
+    setEmail(e.target.value)
   }
 
   return (
@@ -128,49 +117,21 @@ export default function AffiliatePage() {
               <CardHeader>
                 <CardTitle className="text-xl sm:text-2xl">Join Our Affiliate Program</CardTitle>
                 <CardDescription className="text-sm sm:text-base">
-                  Fill out the form below and we'll add you to our affiliate team mailing list
+                  Enter your email below and we'll add you to our affiliate team mailing list
                 </CardDescription>
               </CardHeader>
               <CardContent className="p-4 sm:p-5">
                 {isSubmitted ? (
                   <div className="text-center py-6">
                     <CheckCircle className="h-12 w-12 sm:h-16 sm:w-16 text-green-500 mx-auto mb-4" />
-                    <h3 className="text-lg sm:text-xl font-semibold text-green-800 mb-2">Application Submitted!</h3>
+                    <h3 className="text-lg sm:text-xl font-semibold text-green-800 mb-2">Successfully Subscribed!</h3>
                     <p className="text-green-600 text-sm sm:text-base">
                       Thank you for your interest in joining our affiliate team. We'll be in touch soon with more details
-                      about our program launch.
+                      about our program launch and exclusive opportunities.
                     </p>
                   </div>
                 ) : (
-                  <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="firstName" className="text-sm flex items-center space-x-2">
-                        <User className="h-4 w-4" />
-                        <span>First Name *</span>
-                      </Label>
-                      <Input
-                        id="firstName"
-                        placeholder="Enter your first name"
-                        value={formData.firstName}
-                        onChange={handleChange}
-                        required
-                        className="text-sm py-2"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="lastName" className="text-sm flex items-center space-x-2">
-                        <User className="h-4 w-4" />
-                        <span>Last Name *</span>
-                      </Label>
-                      <Input
-                        id="lastName"
-                        placeholder="Enter your last name"
-                        value={formData.lastName}
-                        onChange={handleChange}
-                        required
-                        className="text-sm py-2"
-                      />
-                    </div>
+                  <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="space-y-2">
                       <Label htmlFor="email" className="text-sm flex items-center space-x-2">
                         <Mail className="h-4 w-4" />
@@ -180,10 +141,10 @@ export default function AffiliatePage() {
                         id="email"
                         type="email"
                         placeholder="Enter your email address"
-                        value={formData.email}
+                        value={email}
                         onChange={handleChange}
                         required
-                        className="text-sm py-2"
+                        className="text-sm py-3"
                       />
                     </div>
                     {error && (
@@ -191,13 +152,14 @@ export default function AffiliatePage() {
                     )}
                     <Button
                       type="submit"
-                      className="w-full bg-emergency-red hover:bg-emergency-red/90 text-sm py-2"
+                      className="w-full bg-emergency-red hover:bg-emergency-red/90 text-sm py-3"
                       disabled={isLoading}
                     >
-                      {isLoading ? "Submitting..." : "Join Affiliate Team"}
+                      {isLoading ? "Subscribing..." : "Join Affiliate Team"}
                     </Button>
                     <p className="text-xs text-gray-500 text-center">
-                      By submitting this form, you agree to receive updates about our affiliate program.
+                      By submitting this form, you agree to receive updates about our affiliate program. 
+                      We respect your privacy and you can unsubscribe at any time.
                     </p>
                   </form>
                 )}
@@ -217,16 +179,16 @@ export default function AffiliatePage() {
               </CardHeader>
               <CardContent className="space-y-3 sm:space-y-4">
                 <p className="text-gray-700 text-sm sm:text-base">
-                  We’re building something bigger than a product — we’re building a movement to protect children, pets, and loved ones using the power of NFC technology. And we want you to help lead the charge.
+                  We're building something bigger than a product — we're building a movement to protect children, pets, and loved ones using the power of NFC technology. And we want you to help lead the charge.
                 </p>
                 <p className="text-gray-700 text-sm sm:text-base">
-                  By joining the TapMeTellThem™ Team, you’ll earn <span className="text-emergency-red font-semibold">10% commission</span> on every sale made through your unique affiliate link. But it doesn’t stop there…
+                  By joining the TapMeTellThem™ Team, you'll earn <span className="text-emergency-red font-semibold">10% commission</span> on every sale made through your unique affiliate link. But it doesn't stop there…
                 </p>
                 <p className="text-gray-700 text-sm sm:text-base">
-                  When you invite others to become affiliates too, you’ll earn <span className="text-emergency-red font-semibold">1% of all their sales</span> — creating a ripple effect of impact and income. It’s our way of rewarding the people who help this mission go viral.
+                  When you invite others to become affiliates too, you'll earn <span className="text-emergency-red font-semibold">1% of all their sales</span> — creating a ripple effect of impact and income. It's our way of rewarding the people who help this mission go viral.
                 </p>
                 <p className="text-gray-700 text-sm sm:text-base">
-                  Whether you’re a content creator, a caring parent, a veterinarian, a PTA leader, the head of your local motorcycle club, or just someone who believes in saving lives — this team is for you.
+                  Whether you're a content creator, a caring parent, a veterinarian, a PTA leader, the head of your local motorcycle club, or just someone who believes in saving lives — this team is for you.
                 </p>
               </CardContent>
             </Card>
