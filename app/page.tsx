@@ -1,10 +1,20 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { Shield, Heart, Users, Star, ArrowRight, CheckCircle, Facebook, Instagram, Linkedin } from "lucide-react"
-import { NewsletterForm } from "@/components/NewsletterForm"
+import Link from "next/link";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import {
+  Shield,
+  Heart,
+  Users,
+  Star,
+  ArrowRight,
+  CheckCircle,
+  Facebook,
+  Instagram,
+  Linkedin,
+} from "lucide-react";
+import { NewsletterForm } from "@/components/NewsletterForm";
 
 export default function HomePage() {
   return (
@@ -26,38 +36,45 @@ export default function HomePage() {
               Get 10% OFF + early access
             </h2>
             <p className="text-base sm:text-lg text-white/90 mb-6 sm:mb-8">
-              Subscribe now to receive your discount code and be the first to know when we go live on Kickstarter!
+              Subscribe now to receive your discount code and be the first to
+              know when we go live on Kickstarter!
             </p>
-            <NewsletterForm 
+            <NewsletterForm
               textColor="text-red"
               labelColor="text-white"
               placeholderStyle="placeholder-gray-300"
               inputBorderColor="border-white/30 focus:border-white"
               buttonStyle="bg-white hover:bg-white/90 text-emergency-red"
             />
-            <p className="text-xs sm:text-sm text-white/70 mt-4">* indicates required</p>
+            <p className="text-xs sm:text-sm text-white/70 mt-4">
+              * indicates required
+            </p>
           </div>
         </div>
       </section>
- {/* Affiliate Call-to-Action */}
-     <section className="bg-black py-4 sm:py-6">
-  <div className="container mx-auto px-3 sm:px-4 lg:px-8 text-center">
-    <div className="max-w-4xl mx-auto">
-      <Button 
-        variant="outline" 
-        size="lg" 
-        className="border-emergency-red text-emergency-red hover:bg-emergency-red hover:text-white bg-white px-4 sm:px-6 lg:px-8 py-3 sm:py-4 text-xs sm:text-sm lg:text-base w-full transition-colors duration-200 min-h-[3rem] sm:min-h-[3.5rem] lg:min-h-[4rem]" 
-        asChild
-      >
-        <Link href="/affiliate" className="flex items-center justify-center">
-          <span className="leading-tight text-center break-words hyphens-auto whitespace-normal">
-            Want to help spread the word and earn commissions? Click here to join our affiliate team!
-          </span>
-        </Link>
-      </Button>
-    </div>
-  </div>
-</section>
+      {/* Affiliate Call-to-Action */}
+      <section className="bg-black py-4 sm:py-6">
+        <div className="container mx-auto px-3 sm:px-4 lg:px-8 text-center">
+          <div className="max-w-4xl mx-auto">
+            <Button
+              variant="outline"
+              size="lg"
+              className="border-emergency-red text-emergency-red hover:bg-emergency-red hover:text-white bg-white px-4 sm:px-6 lg:px-8 py-3 sm:py-4 text-xs sm:text-sm lg:text-base w-full transition-colors duration-200 min-h-[3rem] sm:min-h-[3.5rem] lg:min-h-[4rem]"
+              asChild
+            >
+              <Link
+                href="/affiliate"
+                className="flex items-center justify-center"
+              >
+                <span className="leading-tight text-center break-words hyphens-auto whitespace-normal">
+                  Want to help spread the word and earn commissions? Click here
+                  to join our affiliate team!
+                </span>
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </section>
 
       {/* Hero Section */}
       <section className="relative bg-cool-gray py-4 sm:py-6 lg:py-10 overflow-hidden">
@@ -79,8 +96,9 @@ export default function HomePage() {
               </h1>
 
               <p className="text-base sm:text-lg lg:text-xl text-gray-600 mb-6 sm:mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0">
-                NFC-powered tags that enable instant sharing of location, emergency contact and medical info - for
-                children, pets and loved ones.
+                NFC-powered tags that enable instant sharing of location,
+                emergency contact and medical info - for children, pets and
+                loved ones.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-6 sm:mb-8 justify-center lg:justify-start">
@@ -89,8 +107,13 @@ export default function HomePage() {
                   className="bg-emergency-red hover:bg-emergency-red/90 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg animate-scale-in"
                   asChild
                 >
-                  <a href="https://83btej-r0.myshopify.com/" target="_blank" rel="noopener noreferrer">
-                    Order Now <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
+                  <a
+                    href="https://83btej-r0.myshopify.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Order Now{" "}
+                    <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
                   </a>
                 </Button>
                 <Button
@@ -139,7 +162,8 @@ export default function HomePage() {
               See TapMeSaveMe™ in Action
             </h2>
             <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
-              These are the real-world ways our smart tags protect who matters most.
+              These are the real-world ways our smart tags protect who matters
+              most.
             </p>
           </div>
 
@@ -150,16 +174,25 @@ export default function HomePage() {
                 Child Safety Made Simple
               </h3>
               <p className="text-base sm:text-lg text-gray-600 mb-4 sm:mb-6">
-                Designed with your child's safety in mind. Simply tap with any phone to contact a parent instantly, no
-                app needed. All of our designs can be purchased as a sticker, pin or bracelet.
+                Designed with your child's safety in mind. Simply tap with any
+                phone to contact a parent instantly, no app needed. All of our
+                designs can be purchased as a sticker, pin or bracelet.
               </p>
               <div className="bg-green-50 border border-green-200 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
                 <p className="text-green-800 font-semibold text-sm sm:text-base">
-                  Backed by the autism community! Only $15 on our KickStarter launch will be $19 after.
+                  Backed by the autism community! Only $15 on our KickStarter
+                  launch will be $19 after.
                 </p>
               </div>
-              <Button className="bg-emergency-red hover:bg-emergency-red/90 w-full sm:w-auto" asChild>
-                <a href="https://83btej-r0.myshopify.com/" target="_blank" rel="noopener noreferrer">
+              <Button
+                className="bg-emergency-red hover:bg-emergency-red/90 w-full sm:w-auto"
+                asChild
+              >
+                <a
+                  href="https://83btej-r0.myshopify.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   Shop Child Safety Tags
                 </a>
               </Button>
@@ -197,15 +230,24 @@ export default function HomePage() {
                 Perfect for Cyclists & Motorcyclists
               </h3>
               <p className="text-base sm:text-lg text-gray-600 mb-4 sm:mb-6">
-                Our helmet stickers are perfect for cyclists and motorcyclists. In an emergency, they can be life-saving
-                — especially if the rider is unconscious or unable to speak. Just tap the tag to access their emergency
-                contact and medical info.
+                Our helmet stickers are perfect for cyclists and motorcyclists.
+                In an emergency, they can be life-saving — especially if the
+                rider is unconscious or unable to speak. Just tap the tag to
+                access their emergency contact and medical info.
               </p>
               <p className="text-base sm:text-lg text-gray-600 mb-4 sm:mb-6">
-                This same design as a bracelet is ideal for seniors or anyone with a health condition.
+                This same design as a bracelet is ideal for seniors or anyone
+                with a health condition.
               </p>
-              <Button className="bg-emergency-red hover:bg-emergency-red/90 w-full sm:w-auto" asChild>
-                <a href="https://83btej-r0.myshopify.com/" target="_blank" rel="noopener noreferrer">
+              <Button
+                className="bg-emergency-red hover:bg-emergency-red/90 w-full sm:w-auto"
+                asChild
+              >
+                <a
+                  href="https://83btej-r0.myshopify.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   Shop Helmet Stickers
                 </a>
               </Button>
@@ -219,18 +261,27 @@ export default function HomePage() {
                 Smart Pet Protection
               </h3>
               <p className="text-base sm:text-lg text-gray-600 mb-4 sm:mb-6">
-                If your pet gets lost, the finder can simply tap the embedded tag with their phone to instantly access
-                your contact information.
+                If your pet gets lost, the finder can simply tap the embedded
+                tag with their phone to instantly access your contact
+                information.
               </p>
               <p className="text-base sm:text-lg text-gray-600 mb-4 sm:mb-6 font-semibold">
                 No apps. No chips. Just peace of mind.
               </p>
               <p className="text-base sm:text-lg text-gray-600 mb-4 sm:mb-6">
-                Traditional dog tags can fall off. But this is the only dog collar on the market with an NFC tag
-                securely embedded into the collar itself — making it a smarter, safer solution.
+                Traditional dog tags can fall off. But this is the only dog
+                collar on the market with an NFC tag securely embedded into the
+                collar itself — making it a smarter, safer solution.
               </p>
-              <Button className="bg-emergency-red hover:bg-emergency-red/90 w-full sm:w-auto" asChild>
-                <a href="https://83btej-r0.myshopify.com/" target="_blank" rel="noopener noreferrer">
+              <Button
+                className="bg-emergency-red hover:bg-emergency-red/90 w-full sm:w-auto"
+                asChild
+              >
+                <a
+                  href="https://83btej-r0.myshopify.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   Shop Pet Collars
                 </a>
               </Button>
@@ -278,12 +329,21 @@ export default function HomePage() {
                 ].map((feature, index) => (
                   <div key={index} className="flex items-center space-x-3">
                     <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 text-emergency-red flex-shrink-0" />
-                    <span className="text-gray-700 text-sm sm:text-base">{feature}</span>
+                    <span className="text-gray-700 text-sm sm:text-base">
+                      {feature}
+                    </span>
                   </div>
                 ))}
               </div>
-              <Button className="bg-emergency-red hover:bg-emergency-red/90 w-full sm:w-auto" asChild>
-                <a href="https://83btej-r0.myshopify.com/" target="_blank" rel="noopener noreferrer">
+              <Button
+                className="bg-emergency-red hover:bg-emergency-red/90 w-full sm:w-auto"
+                asChild
+              >
+                <a
+                  href="https://83btej-r0.myshopify.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   View All Products
                 </a>
               </Button>
@@ -301,10 +361,13 @@ export default function HomePage() {
               Be One of the First to Protect Your Loved Ones
             </h2>
             <p className="text-base sm:text-lg text-gray-600 mb-6 sm:mb-8">
-              Sign up now for launch updates and to receive the 10% off discount code.
+              Sign up now for launch updates and to receive the 10% off discount
+              code.
             </p>
             <NewsletterForm />
-            <p className="text-xs sm:text-sm text-gray-500 mt-4">* indicates required</p>
+            <p className="text-xs sm:text-sm text-gray-500 mt-4">
+              * indicates required
+            </p>
           </div>
         </div>
       </section>
@@ -313,54 +376,60 @@ export default function HomePage() {
       <section className="py-2 sm:py-6 bg-gray-50">
         <div className="container mx-auto px-3 sm:px-4 lg:px-8 text-center">
           <div className="max-w-2xl mx-auto animate-slide-up">
-            <h3 className="text-xl sm:text-2xl font-bold text-dark-gray mb-3 sm:mb-4">Be Part of Our Mission</h3>
+            <h3 className="text-xl sm:text-2xl font-bold text-dark-gray mb-3 sm:mb-4">
+              Be Part of Our Mission
+            </h3>
             <p className="text-base sm:text-lg text-gray-600 mb-6 sm:mb-8">
-              Please follow us on our social media accounts for real stories, updates and launch news. Simply click the
-              icons below.
+              Please follow us on our social media accounts for real stories,
+              updates and launch news. Simply click the icons below.
             </p>
             <div className="flex justify-center space-x-4 sm:space-x-6">
-              <a 
+              <a
                 href="https://www.facebook.com/share/15yFxZAdy6/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-emergency-red transition-colors duration-300"
                 aria-label="Follow us on Facebook"
               >
-                <Facebook className="h-6 w-6 sm:h-8 sm:w-8" />
+                <Facebook className="h-10 w-10 sm:h-10 sm:w-10 text-[#1877F2]" />
               </a>
-              <a 
+              <a
                 href="https://www.tiktok.com/@tapmesaveme"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-emergency-red transition-colors duration-300"
                 aria-label="Follow us on TikTok"
               >
-                <svg className="h-6 w-6 sm:h-8 sm:w-8" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+                <svg
+                  className="h-10 w-10 sm:h-10 sm:w-10 text-[#69C9D0]"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" />
                 </svg>
               </a>
-              <a 
+              <a
                 href="https://www.instagram.com/tapmesaveme"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-emergency-red transition-colors duration-300"
                 aria-label="Follow us on Instagram"
               >
-                <Instagram className="h-6 w-6 sm:h-8 sm:w-8" />
+                <Instagram className="h-10 w-10 sm:h-10 sm:w-10 text-[#E1306C] " />
               </a>
-              <a 
+              <a
                 href="https://www.linkedin.com/in/michael-lutz-913602163?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-emergency-red transition-colors duration-300"
                 aria-label="Follow us on LinkedIn"
               >
-                <Linkedin className="h-6 w-6 sm:h-8 sm:w-8" />
+                <Linkedin className="h-10 w-10 sm:h-10 sm:w-10 text-[#0077B5]" />
               </a>
             </div>
           </div>
         </div>
       </section>
     </div>
-  )
+  );
 }

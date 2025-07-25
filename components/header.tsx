@@ -1,41 +1,49 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { useState } from "react"
-import { usePathname } from "next/navigation"
-import { Menu, X } from "lucide-react"
-import Image from "next/image"
+import Link from "next/link";
+import { useState } from "react";
+import { usePathname } from "next/navigation";
+import { Menu, X } from "lucide-react";
+import Image from "next/image";
 
 export function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const pathname = usePathname()
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   const isActive = (path: string) => {
-    if (path === "/" && pathname === "/") return true
-    if (path !== "/" && pathname.startsWith(path)) return true
-    return false
-  }
+    if (path === "/" && pathname === "/") return true;
+    if (path !== "/" && pathname.startsWith(path)) return true;
+    return false;
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full bg-[#E1E1E1]">
       <div className="container mx-auto px-3 sm:px-4 lg:px-8">
-        <div className="flex h-14 sm:h-16 items-center justify-between">
-          <Link href="/" className="flex items-center">
+        <div className="flex h-25 sm:h-18 items-center justify-between">
+          {/* Logo wrapped in Link for both desktop and mobile */}
+          <Link href="/" className="flex items-center overflow-hidden">
             <Image
-              src="/Logo.png?height=45&width=45"
+              src="/Logo.png?height=70&width=80"
               alt="TapMeSaveMe Logo"
-              width={45}
-              height={45}
-              className="rounded-lg"
+              width={80} // Increased size
+              height={80} // Increased size
+              className="rounded-lg bg-transparent" // Removed negative padding
             />
           </Link>
+
+          {/* Responsive h5 text */}
+          <h5 className="text-sm sm:text-base md:text-lg font-medium cursor-default">
+            Peace of Mind, One Tap Away
+          </h5>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6 lg:space-x-8">
             <Link
               href="/"
               className={`transition-colors text-sm lg:text-base relative ${
-                isActive("/") ? "text-emergency-red font-medium" : "text-dark-gray hover:text-emergency-red"
+                isActive("/")
+                  ? "text-emergency-red font-medium"
+                  : "text-dark-gray hover:text-emergency-red"
               }`}
             >
               Home
@@ -46,7 +54,9 @@ export function Header() {
             <Link
               href="/activate"
               className={`transition-colors text-sm lg:text-base relative ${
-                isActive("/activate") ? "text-emergency-red font-medium" : "text-dark-gray hover:text-emergency-red"
+                isActive("/activate")
+                  ? "text-emergency-red font-medium"
+                  : "text-dark-gray hover:text-emergency-red"
               }`}
             >
               Activate Product
@@ -57,7 +67,9 @@ export function Header() {
             <Link
               href="/faq"
               className={`transition-colors text-sm lg:text-base relative ${
-                isActive("/faq") ? "text-emergency-red font-medium" : "text-dark-gray hover:text-emergency-red"
+                isActive("/faq")
+                  ? "text-emergency-red font-medium"
+                  : "text-dark-gray hover:text-emergency-red"
               }`}
             >
               FAQ
@@ -68,7 +80,9 @@ export function Header() {
             <Link
               href="/contact"
               className={`transition-colors text-sm lg:text-base relative ${
-                isActive("/contact") ? "text-emergency-red font-medium" : "text-dark-gray hover:text-emergency-red"
+                isActive("/contact")
+                  ? "text-emergency-red font-medium"
+                  : "text-dark-gray hover:text-emergency-red"
               }`}
             >
               Contact
@@ -79,7 +93,9 @@ export function Header() {
             <Link
               href="/affiliate"
               className={`transition-colors text-sm lg:text-base relative ${
-                isActive("/affiliate") ? "text-emergency-red font-medium" : "text-dark-gray hover:text-emergency-red"
+                isActive("/affiliate")
+                  ? "text-emergency-red font-medium"
+                  : "text-dark-gray hover:text-emergency-red"
               }`}
             >
               Affiliate
@@ -91,7 +107,9 @@ export function Header() {
 
           <button
             className="hidden md:inline-flex bg-emergency-red hover:bg-emergency-red/90 text-white px-4 py-2 rounded-md font-medium text-sm lg:text-base transition-colors focus:outline-none"
-            onClick={() => window.open("https://83btej-r0.myshopify.com/", "_blank")}
+            onClick={() =>
+              window.open("https://83btej-r0.myshopify.com/", "_blank")
+            }
           >
             Order Now
           </button>
@@ -101,7 +119,11 @@ export function Header() {
             className="md:hidden p-2 focus:outline-none"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
-            {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            {isMenuOpen ? (
+              <X className="h-5 w-5" />
+            ) : (
+              <Menu className="h-5 w-5" />
+            )}
           </button>
         </div>
 
@@ -116,6 +138,7 @@ export function Header() {
                     ? "text-emergency-red font-medium bg-emergency-red/10"
                     : "text-dark-gray hover:text-emergency-red hover:bg-gray-50"
                 }`}
+                onClick={() => setIsMenuOpen(false)} // Close menu on click
               >
                 Home
               </Link>
@@ -126,6 +149,7 @@ export function Header() {
                     ? "text-emergency-red font-medium bg-emergency-red/10"
                     : "text-dark-gray hover:text-emergency-red hover:bg-gray-50"
                 }`}
+                onClick={() => setIsMenuOpen(false)} // Close menu on click
               >
                 Activate Product
               </Link>
@@ -136,6 +160,7 @@ export function Header() {
                     ? "text-emergency-red font-medium bg-emergency-red/10"
                     : "text-dark-gray hover:text-emergency-red hover:bg-gray-50"
                 }`}
+                onClick={() => setIsMenuOpen(false)} // Close menu on click
               >
                 FAQ
               </Link>
@@ -146,6 +171,7 @@ export function Header() {
                     ? "text-emergency-red font-medium bg-emergency-red/10"
                     : "text-dark-gray hover:text-emergency-red hover:bg-gray-50"
                 }`}
+                onClick={() => setIsMenuOpen(false)} // Close menu on click
               >
                 Contact
               </Link>
@@ -156,13 +182,17 @@ export function Header() {
                     ? "text-emergency-red font-medium bg-emergency-red/10"
                     : "text-dark-gray hover:text-emergency-red hover:bg-gray-50"
                 }`}
+                onClick={() => setIsMenuOpen(false)} // Close menu on click
               >
                 Affiliate
               </Link>
               <div className="px-3 py-2">
                 <button
                   className="w-full bg-emergency-red hover:bg-emergency-red/90 text-white px-4 py-2 rounded-md font-medium text-sm transition-colors focus:outline-none"
-                  onClick={() => window.open("https://83btej-r0.myshopify.com/", "_blank")}
+                  onClick={() => {
+                    window.open("https://83btej-r0.myshopify.com/", "_blank");
+                    setIsMenuOpen(false); // Close menu on click
+                  }}
                 >
                   Order Now
                 </button>
@@ -172,5 +202,5 @@ export function Header() {
         )}
       </div>
     </header>
-  )
+  );
 }
