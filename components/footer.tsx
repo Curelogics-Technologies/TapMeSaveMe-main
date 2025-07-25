@@ -142,7 +142,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/privacy"
+                  href="https://tapmesavemeprivacy.carrd.co/"
                   className="text-gray-600 hover:text-dark-gray transition-colors text-sm"
                 >
                   Privacy Policy

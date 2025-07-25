@@ -31,8 +31,7 @@ export function Header() {
             />
           </Link>
 
-          {/* Responsive h5 text */}
-          <h5 className="text-sm sm:text-base md:text-lg font-medium cursor-default">
+          <h5 className="whitespace-nowrap text-[clamp(1rem,4vw,1.5rem)] sm:text-base md:text-lg lg:text-xl font-semibold uppercase cursor-default tracking-tight">
             Peace of Mind, One Tap Away
           </h5>
 

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { WholesaleBanner } from "@/components/WholeSaleBanner";
 import {
   Shield,
   Heart,
@@ -15,14 +16,16 @@ import {
   Linkedin,
 } from "lucide-react";
 import { NewsletterForm } from "@/components/NewsletterForm";
-
+const handleContactUsClick = () => {
+  window.location.href = "mailto:founder@tapmesaveme.com";
+};
 export default function HomePage() {
   return (
     <div className="min-h-screen">
       {/* Kickstarter Launch Banner */}
       <section className="bg-black text-white py-5 sm:py-7">
         <div className="container mx-auto px-3 sm:px-4 lg:px-8 text-center">
-          <p className="text-xl sm:text-2xl lg:text-3xl font-bold animate-pulse">
+          <p className="font-bold animate-pulse whitespace-nowrap text-[clamp(1rem,5vw,2rem)]">
             🚨 Launching on Kickstarter VERY soon! 🚨
           </p>
         </div>
@@ -33,7 +36,7 @@ export default function HomePage() {
         <div className="container mx-auto px-3 sm:px-4 lg:px-8 text-center">
           <div className="max-w-2xl mx-auto animate-slide-up">
             <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3 sm:mb-4">
-              Get 10% OFF + early access
+              Get 10% OFF + Early Access
             </h2>
             <p className="text-base sm:text-lg text-white/90 mb-6 sm:mb-8">
               Subscribe now to receive your discount code and be the first to
@@ -116,17 +119,9 @@ export default function HomePage() {
                     <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
                   </a>
                 </Button>
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="border-dark-gray text-dark-gray hover:bg-dark-gray hover:text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg bg-transparent"
-                  asChild
-                >
-                  <Link href="#features">Learn More</Link>
-                </Button>
               </div>
 
-              <div className="flex items-center justify-center lg:justify-start space-x-4 sm:space-x-6 text-sm text-gray-600">
+              {/* <div className="flex items-center justify-center lg:justify-start space-x-4 sm:space-x-6 text-sm text-gray-600">
                 <div className="flex items-center space-x-1">
                   <Star className="h-3 w-3 sm:h-4 sm:w-4 text-yellow-400 fill-current" />
                   <span>4.9/5 Rating</span>
@@ -135,24 +130,24 @@ export default function HomePage() {
                   <Users className="h-3 w-3 sm:h-4 sm:w-4" />
                   <span>10,000+ Protected</span>
                 </div>
-              </div>
+              </div> */}
             </div>
 
             <div className="animate-fade-in">
-              <div className="relative max-w-xs mx-auto sm:max-w-sm lg:max-w-md">
-                <div className="absolute inset-0 bg-gradient-to-r from-emergency-red/20 to-transparent rounded-3xl transform rotate-3"></div>
+              <div className="bg-black p-2 rounded-md max-w-xs mx-auto sm:max-w-sm lg:max-w-md">
                 <Image
                   src="/Logo.png"
                   alt="TapMeSaveMe NFC Tags"
                   width={350}
                   height={450}
-                  className="relative rounded-3xl shadow-2xl w-full h-auto"
+                  className="w-full h-auto"
                 />
               </div>
             </div>
           </div>
         </div>
       </section>
+      <WholesaleBanner />
 
       {/* Product Showcase */}
       <section id="features" className="py-16 sm:py-20 bg-gray-50">
@@ -169,14 +164,63 @@ export default function HomePage() {
 
           {/* Children Safety */}
           <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 mb-16 sm:mb-20">
+            <div className="animate-fade-in order-1 lg:order-none">
+              <div className="relative max-w-sm mx-auto sm:max-w-md">
+                <div className="absolute inset-0 bg-gradient-to-r from-emergency-red/10 to-transparent rounded-3xl transform rotate-1"></div>
+                <Image
+                  src="/watchbatch.jpeg?height=250&width=350"
+                  alt="Child Safety NFC Tags"
+                  width={350}
+                  height={250}
+                  className="relative rounded-3xl shadow-2xl w-full h-auto"
+                />
+              </div>
+            </div>
             <div className="animate-slide-up order-2 lg:order-none text-center lg:text-left">
               <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-dark-gray mb-4 sm:mb-6">
-                Child Safety Made Simple
+                NFC Child Safety Bracelet
               </h3>
               <p className="text-base sm:text-lg text-gray-600 mb-4 sm:mb-6">
-                Designed with your child's safety in mind. Simply tap with any
-                phone to contact a parent instantly, no app needed. All of our
-                designs can be purchased as a sticker, pin or bracelet.
+                Our NFC Child Safety Bracelet gives parents peace of mind with a
+                simple tap. If your child ever gets lost, anyone with a
+                smartphone can tap the bracelet to instantly access emergency
+                contact info. No app needed. It’s waterproof, durable, and
+                designed for everyday adventures. Help your child stay safe
+                while staying stylish.
+              </p>
+              <div className="bg-green-50 border border-green-200 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
+                <p className="text-green-800 font-semibold text-sm sm:text-base">
+                  Backed by the autism community! Only $15 on our KickStarter
+                  launch will be $19 after.
+                </p>
+              </div>
+              <Button
+                className="bg-emergency-red hover:bg-emergency-red/90 w-full sm:w-auto"
+                asChild
+              >
+                <a
+                  href="https://83btej-r0.myshopify.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Shop Child Safety Tags
+                </a>
+              </Button>
+            </div>
+          </div>
+          {/* Children Safety Pin*/}
+          <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 mb-16 sm:mb-20">
+            <div className="animate-slide-up order-2 lg:order-none text-center lg:text-left">
+              <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-dark-gray mb-4 sm:mb-6">
+                NFC Child Safety Pin
+              </h3>
+              <p className="text-base sm:text-lg text-gray-600 mb-4 sm:mb-6">
+                This has all the features of the Child Safety Bracelet, but we
+                know not every child wants something on their wrist. The pin
+                offers a discreet alternative that can be worn on a jacket,
+                backpack, shirt, or even on their back — often without the child
+                noticing. It’s ideal for kids with sensory sensitivities or
+                those who prefer not to wear a bracelet.
               </p>
               <div className="bg-green-50 border border-green-200 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
                 <p className="text-green-800 font-semibold text-sm sm:text-base">
@@ -224,21 +268,39 @@ export default function HomePage() {
                   className="relative rounded-3xl shadow-2xl w-full h-auto"
                 />
               </div>
+              <Button
+                className="bg-emergency-red hover:bg-emergency-red/90 w-full sm:w-auto mt-5"
+                asChild
+              >
+                <a
+                  href="https://83btej-r0.myshopify.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View All Products
+                </a>
+              </Button>
             </div>
             <div className="animate-slide-up order-2 lg:order-2 text-center lg:text-left">
               <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-dark-gray mb-4 sm:mb-6">
-                Perfect for Cyclists & Motorcyclists
+                NFC Emergency Contact Stickers
               </h3>
               <p className="text-base sm:text-lg text-gray-600 mb-4 sm:mb-6">
-                Our helmet stickers are perfect for cyclists and motorcyclists.
-                In an emergency, they can be life-saving — especially if the
-                rider is unconscious or unable to speak. Just tap the tag to
-                access their emergency contact and medical info.
+                Our NFC Emergency Contact Sticker is ideal for motorcycle and
+                bicycle helmets, but it has plenty of other uses. With just the
+                tap of a phone, you can instantly share your emergency contact
+                info and optional medical details. Stick it on a gym water
+                bottle, construction helmet, child’s car seat, or anywhere you
+                could use a little extra protection — all at an affordable
+                price.
               </p>
-              <p className="text-base sm:text-lg text-gray-600 mb-4 sm:mb-6">
-                This same design as a bracelet is ideal for seniors or anyone
-                with a health condition.
-              </p>
+
+              <div className="bg-green-50 border border-green-200 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
+                <p className="text-green-800 font-semibold text-sm sm:text-base">
+                  Backed by the autism community! Only $7 on our KickStarter
+                  launch will be $11 after.
+                </p>
+              </div>
               <Button
                 className="bg-emergency-red hover:bg-emergency-red/90 w-full sm:w-auto"
                 asChild
@@ -258,7 +320,7 @@ export default function HomePage() {
           <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 mb-16 sm:mb-20">
             <div className="animate-slide-up order-2 lg:order-none text-center lg:text-left">
               <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-dark-gray mb-4 sm:mb-6">
-                Smart Pet Protection
+                NFC Emergency Contact Dog Collar
               </h3>
               <p className="text-base sm:text-lg text-gray-600 mb-4 sm:mb-6">
                 If your pet gets lost, the finder can simply tap the embedded
@@ -273,6 +335,13 @@ export default function HomePage() {
                 collar on the market with an NFC tag securely embedded into the
                 collar itself — making it a smarter, safer solution.
               </p>
+
+              <div className="bg-green-50 border border-green-200 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
+                <p className="text-green-800 font-semibold text-sm sm:text-base">
+                  Backed by the autism community! Only $20 on our KickStarter
+                  launch will be $25 after.
+                </p>
+              </div>
               <Button
                 className="bg-emergency-red hover:bg-emergency-red/90 w-full sm:w-auto"
                 asChild
@@ -313,6 +382,18 @@ export default function HomePage() {
                   className="relative rounded-3xl shadow-2xl w-full h-auto"
                 />
               </div>
+              <Button
+                className="bg-emergency-red hover:bg-emergency-red/90 w-full sm:w-auto mt-5"
+                asChild
+              >
+                <a
+                  href="https://83btej-r0.myshopify.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View All Products
+                </a>
+              </Button>
             </div>
             <div className="animate-slide-up order-2 lg:order-none text-center lg:text-left">
               <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-dark-gray mb-4 sm:mb-6">
@@ -325,7 +406,8 @@ export default function HomePage() {
                   "Works with all NFC-enabled smartphones",
                   "No apps required for emergency access",
                   "Secure, encrypted data storage",
-                  "Available as stickers, pins, or bracelets",
+                  "Made with top-of-the-line UV sunblock ink, meaning it's built to last.",
+                  "We added an anti-ferrite layer, which ensures it works on metal surfaces.",
                 ].map((feature, index) => (
                   <div key={index} className="flex items-center space-x-3">
                     <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 text-emergency-red flex-shrink-0" />
@@ -347,85 +429,6 @@ export default function HomePage() {
                   View All Products
                 </a>
               </Button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Newsletter Section */}
-      <section className="py-16 sm:py-20 bg-white">
-        <div className="container mx-auto px-3 sm:px-4 lg:px-8 text-center">
-          <div className="max-w-2xl mx-auto animate-slide-up">
-            <Heart className="h-10 w-10 sm:h-12 sm:w-12 text-emergency-red mx-auto mb-4 sm:mb-6" />
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-dark-gray mb-4 sm:mb-6">
-              Be One of the First to Protect Your Loved Ones
-            </h2>
-            <p className="text-base sm:text-lg text-gray-600 mb-6 sm:mb-8">
-              Sign up now for launch updates and to receive the 10% off discount
-              code.
-            </p>
-            <NewsletterForm />
-            <p className="text-xs sm:text-sm text-gray-500 mt-4">
-              * indicates required
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Social Media Section */}
-      <section className="py-2 sm:py-6 bg-gray-50">
-        <div className="container mx-auto px-3 sm:px-4 lg:px-8 text-center">
-          <div className="max-w-2xl mx-auto animate-slide-up">
-            <h3 className="text-xl sm:text-2xl font-bold text-dark-gray mb-3 sm:mb-4">
-              Be Part of Our Mission
-            </h3>
-            <p className="text-base sm:text-lg text-gray-600 mb-6 sm:mb-8">
-              Please follow us on our social media accounts for real stories,
-              updates and launch news. Simply click the icons below.
-            </p>
-            <div className="flex justify-center space-x-4 sm:space-x-6">
-              <a
-                href="https://www.facebook.com/share/15yFxZAdy6/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-emergency-red transition-colors duration-300"
-                aria-label="Follow us on Facebook"
-              >
-                <Facebook className="h-10 w-10 sm:h-10 sm:w-10 text-[#1877F2]" />
-              </a>
-              <a
-                href="https://www.tiktok.com/@tapmesaveme"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-emergency-red transition-colors duration-300"
-                aria-label="Follow us on TikTok"
-              >
-                <svg
-                  className="h-10 w-10 sm:h-10 sm:w-10 text-[#69C9D0]"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" />
-                </svg>
-              </a>
-              <a
-                href="https://www.instagram.com/tapmesaveme"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-emergency-red transition-colors duration-300"
-                aria-label="Follow us on Instagram"
-              >
-                <Instagram className="h-10 w-10 sm:h-10 sm:w-10 text-[#E1306C] " />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/michael-lutz-913602163?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-emergency-red transition-colors duration-300"
-                aria-label="Follow us on LinkedIn"
-              >
-                <Linkedin className="h-10 w-10 sm:h-10 sm:w-10 text-[#0077B5]" />
-              </a>
             </div>
           </div>
         </div>
