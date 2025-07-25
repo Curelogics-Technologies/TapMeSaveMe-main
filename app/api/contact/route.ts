@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Invalid email address" }, { status: 400 })
     }
 
-    // Set SendGrid API key
+    // Set SendGrid API
     const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY
     if (!SENDGRID_API_KEY) {
       console.log("Contact form submission (demo mode):", formData)
