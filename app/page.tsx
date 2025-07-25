@@ -25,7 +25,7 @@ export default function HomePage() {
       {/* Kickstarter Launch Banner */}
       <section className="bg-black text-white py-5 sm:py-7">
         <div className="container mx-auto px-3 sm:px-4 lg:px-8 text-center">
-          <p className="font-bold animate-pulse whitespace-nowrap text-[clamp(1rem,5vw,2rem)]">
+          <p className="font-semibold animate-pulse whitespace-nowrap text-[clamp(0.8rem,4vw,1.5rem)]">
             🚨 Launching on Kickstarter VERY soon! 🚨
           </p>
         </div>
@@ -55,7 +55,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      {/* Affiliate Call-to-Action*/}
+      {/* Affiliate Call-to-Action */}
       <section className="bg-black py-4 sm:py-6">
         <div className="container mx-auto px-3 sm:px-4 lg:px-8 text-center">
           <div className="max-w-4xl mx-auto">
@@ -203,7 +203,7 @@ export default function HomePage() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Shop Child Safety Tags
+                  Shop NFC Child Safety Bracelet
                 </a>
               </Button>
             </div>
@@ -237,7 +237,7 @@ export default function HomePage() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Shop Child Safety Tags
+                  Shop NFC Child Safety Pin
                 </a>
               </Button>
             </div>
@@ -245,7 +245,7 @@ export default function HomePage() {
               <div className="relative max-w-sm mx-auto sm:max-w-md">
                 <div className="absolute inset-0 bg-gradient-to-r from-emergency-red/10 to-transparent rounded-3xl transform rotate-1"></div>
                 <Image
-                  src="/kids badge.png?height=250&width=350"
+                  src="/tag.jpeg?height=250&width=350"
                   alt="Child Safety NFC Tags"
                   width={350}
                   height={250}
@@ -268,19 +268,8 @@ export default function HomePage() {
                   className="relative rounded-3xl shadow-2xl w-full h-auto"
                 />
               </div>
-              <Button
-                className="bg-emergency-red hover:bg-emergency-red/90 w-full sm:w-auto mt-5"
-                asChild
-              >
-                <a
-                  href="https://83btej-r0.myshopify.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  View All Products
-                </a>
-              </Button>
             </div>
+
             <div className="animate-slide-up order-2 lg:order-2 text-center lg:text-left">
               <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-dark-gray mb-4 sm:mb-6">
                 NFC Emergency Contact Stickers
@@ -297,8 +286,7 @@ export default function HomePage() {
 
               <div className="bg-green-50 border border-green-200 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
                 <p className="text-green-800 font-semibold text-sm sm:text-base">
-                  Backed by the autism community! Only $7 on our KickStarter
-                  launch will be $11 after.
+                  Only $7 on our KickStarter launch will be $11 after.
                 </p>
               </div>
               <Button
@@ -310,10 +298,21 @@ export default function HomePage() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Shop Helmet Stickers
+                  Shop NFC Emergency Contact Stickers
                 </a>
               </Button>
             </div>
+          </div>
+
+          <div className="relative max-w-sm mx-auto sm:max-w-md mb-16">
+            <div className="absolute inset-0 bg-gradient-to-r from-emergency-red/10 to-transparent rounded-3xl transform -rotate-2"></div>
+            <Image
+              src="/Sticker.png?height=250&width=350"
+              alt="Product Specifications"
+              width={350}
+              height={250}
+              className="relative rounded-3xl shadow-2xl w-full h-auto"
+            />
           </div>
 
           {/* Pet Safety */}
@@ -338,8 +337,7 @@ export default function HomePage() {
 
               <div className="bg-green-50 border border-green-200 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
                 <p className="text-green-800 font-semibold text-sm sm:text-base">
-                  Backed by the autism community! Only $20 on our KickStarter
-                  launch will be $25 after.
+                  Only $20 on our KickStarter launch will be $25 after.
                 </p>
               </div>
               <Button
@@ -351,7 +349,7 @@ export default function HomePage() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Shop Pet Collars
+                  Shop NFC Emergency Contact Dog Collar
                 </a>
               </Button>
             </div>
@@ -370,32 +368,9 @@ export default function HomePage() {
           </div>
 
           {/* Product Specifications */}
-          <div className="grid lg:grid-cols-2 gap-8 sm:gap-12">
-            <div className="animate-fade-in order-1 lg:order-none">
-              <div className="relative max-w-sm mx-auto sm:max-w-md">
-                <div className="absolute inset-0 bg-gradient-to-r from-emergency-red/10 to-transparent rounded-3xl transform -rotate-2"></div>
-                <Image
-                  src="/Sticker.png?height=250&width=350"
-                  alt="Product Specifications"
-                  width={350}
-                  height={250}
-                  className="relative rounded-3xl shadow-2xl w-full h-auto"
-                />
-              </div>
-              <Button
-                className="bg-emergency-red hover:bg-emergency-red/90 w-full sm:w-auto mt-5"
-                asChild
-              >
-                <a
-                  href="https://83btej-r0.myshopify.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  View All Products
-                </a>
-              </Button>
-            </div>
-            <div className="animate-slide-up order-2 lg:order-none text-center lg:text-left">
+          <div className="grid lg:grid-cols-1 gap-8 sm:gap-12">
+            <div className="animate-fade-in order-1 lg:order-none"></div>
+            <div className="animate-slide-up order-2 lg:order-none  lg:text-left">
               <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-dark-gray mb-4 sm:mb-6">
                 Designed for Real-World Use
               </h3>
@@ -409,26 +384,14 @@ export default function HomePage() {
                   "Made with top-of-the-line UV sunblock ink, meaning it's built to last.",
                   "We added an anti-ferrite layer, which ensures it works on metal surfaces.",
                 ].map((feature, index) => (
-                  <div key={index} className="flex items-center space-x-3">
-                    <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 text-emergency-red flex-shrink-0" />
-                    <span className="text-gray-700 text-sm sm:text-base">
+                  <div key={index} className="flex items-start space-x-3">
+                    <CheckCircle className="mt-1 h-4 w-4 sm:h-5 sm:w-5 text-emergency-red flex-shrink-0" />
+                    <span className="text-gray-700 text-sm sm:text-base leading-snug">
                       {feature}
                     </span>
                   </div>
                 ))}
               </div>
-              <Button
-                className="bg-emergency-red hover:bg-emergency-red/90 w-full sm:w-auto"
-                asChild
-              >
-                <a
-                  href="https://83btej-r0.myshopify.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  View All Products
-                </a>
-              </Button>
             </div>
           </div>
         </div>
