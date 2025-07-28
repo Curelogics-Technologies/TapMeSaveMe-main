@@ -115,7 +115,7 @@ export default function FAQPage() {
 
         {/* Contact Support */}
         <div className="grid sm:grid-cols-2 gap-6 sm:gap-8">
-          <div className="bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition-shadow animate-fade-in">
+          {/* <div className="bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition-shadow animate-fade-in">
             <div className="flex items-center space-x-3 mb-4">
               <div className="w-10 h-10 bg-emergency-red/10 rounded-lg flex items-center justify-center">
                 <Phone className="h-5 w-5 text-emergency-red" />
@@ -125,7 +125,7 @@ export default function FAQPage() {
             <p className="text-gray-600 mb-4 text-sm sm:text-base">Need immediate help? Call our support team.</p>
             <p className="text-xl sm:text-2xl font-bold text-dark-gray mb-1">1-502-314-6453</p>
             <p className="text-xs sm:text-sm text-gray-500">We can call you back ASAP. Start with an SMS text.</p>
-          </div>
+          </div> */}
 
           <div
             className="bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition-shadow animate-fade-in"

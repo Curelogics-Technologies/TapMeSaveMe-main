@@ -16,17 +16,19 @@ import {
   Linkedin,
 } from "lucide-react";
 import { NewsletterForm } from "@/components/NewsletterForm";
+
 const handleContactUsClick = () => {
   window.location.href = "mailto:founder@tapmesaveme.com";
 };
+
 export default function HomePage() {
   return (
     <div className="min-h-screen">
       {/* Kickstarter Launch Banner */}
       <section className="bg-black text-white py-5 sm:py-7">
         <div className="container mx-auto px-3 sm:px-4 lg:px-8 text-center">
-          <p className="font-semibold animate-pulse whitespace-nowrap text-[clamp(0.8rem,4vw,1.5rem)]">
-            🚨 Launching on Kickstarter VERY soon! 🚨
+          <p className="font-semibold animate-pulse whitespace-nowrap text-[clamp(0.9rem,4vw,1.5rem)]">
+            🚨 Launching on Kickstarter August 8th! 🚨
           </p>
         </div>
       </section>
@@ -38,7 +40,7 @@ export default function HomePage() {
             <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3 sm:mb-4">
               Get 10% OFF + Early Access
             </h2>
-            <p className="text-base sm:text-lg text-white/90 mb-6 sm:mb-8">
+            <p className="text-sm sm:text-lg text-white/90 mb-6 sm:mb-8">
               Subscribe now to receive your discount code and be the first to
               know when we go live on Kickstarter!
             </p>
@@ -55,6 +57,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
       {/* Affiliate Call-to-Action */}
       <section className="bg-black py-4 sm:py-6">
         <div className="container mx-auto px-3 sm:px-4 lg:px-8 text-center">
@@ -120,17 +123,6 @@ export default function HomePage() {
                   </a>
                 </Button>
               </div>
-
-              {/* <div className="flex items-center justify-center lg:justify-start space-x-4 sm:space-x-6 text-sm text-gray-600">
-                <div className="flex items-center space-x-1">
-                  <Star className="h-3 w-3 sm:h-4 sm:w-4 text-yellow-400 fill-current" />
-                  <span>4.9/5 Rating</span>
-                </div>
-                <div className="flex items-center space-x-1">
-                  <Users className="h-3 w-3 sm:h-4 sm:w-4" />
-                  <span>10,000+ Protected</span>
-                </div>
-              </div> */}
             </div>
 
             <div className="animate-fade-in">
@@ -147,6 +139,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
       <WholesaleBanner />
 
       {/* Product Showcase */}
@@ -176,7 +169,7 @@ export default function HomePage() {
                 />
               </div>
             </div>
-            <div className="animate-slide-up order-2 lg:order-none text-center lg:text-left">
+            <div className="animate-slide-up order-2 lg:order-none text-left">
               <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-dark-gray mb-4 sm:mb-6">
                 NFC Child Safety Bracelet
               </h3>
@@ -208,9 +201,10 @@ export default function HomePage() {
               </Button>
             </div>
           </div>
-          {/* Children Safety Pin*/}
+
+          {/* Children Safety Pin */}
           <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 mb-16 sm:mb-20">
-            <div className="animate-slide-up order-2 lg:order-none text-center lg:text-left">
+            <div className="animate-slide-up order-2 lg:order-none text-left">
               <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-dark-gray mb-4 sm:mb-6">
                 NFC Child Safety Pin
               </h3>
@@ -269,8 +263,7 @@ export default function HomePage() {
                 />
               </div>
             </div>
-
-            <div className="animate-slide-up order-2 lg:order-2 text-center lg:text-left">
+            <div className="animate-slide-up order-2 lg:order-2 text-left">
               <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-dark-gray mb-4 sm:mb-6">
                 NFC Emergency Contact Stickers
               </h3>
@@ -283,7 +276,6 @@ export default function HomePage() {
                 could use a little extra protection — all at an affordable
                 price.
               </p>
-
               <div className="bg-green-50 border border-green-200 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
                 <p className="text-green-800 font-semibold text-sm sm:text-base">
                   Only $7 on our KickStarter launch will be $11 after.
@@ -304,20 +296,64 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="relative max-w-sm mx-auto sm:max-w-md mb-16">
-            <div className="absolute inset-0 bg-gradient-to-r from-emergency-red/10 to-transparent rounded-3xl transform -rotate-2"></div>
-            <Image
-              src="/Sticker.png?height=250&width=350"
-              alt="Product Specifications"
-              width={350}
-              height={250}
-              className="relative rounded-3xl shadow-2xl w-full h-auto"
-            />
+          {/* Product Specifications */}
+          <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 mb-16 sm:mb-20">
+            <div className="animate-fade-in order-1 lg:order-1">
+              <div className="relative max-w-sm mx-auto sm:max-w-md">
+                <div className="absolute inset-0 bg-gradient-to-r from-emergency-red/10 to-transparent rounded-3xl transform -rotate-2"></div>
+                <Image
+                  src="/Sticker.jpeg?height=250&width=350"
+                  alt="Product Specifications"
+                  width={350}
+                  height={250}
+                  className="relative rounded-3xl shadow-2xl w-full h-auto"
+                />
+              </div>
+            </div>
+            <div className="animate-slide-up order-2 lg:order-2 text-left">
+              <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-dark-gray mb-4 sm:mb-6">
+                Designed for Real-World Use
+              </h3>
+              <p className="text-base sm:text-lg text-gray-600 mb-4 sm:mb-6">
+                Our NFC tags are built to withstand the toughest conditions while
+                providing seamless functionality for emergencies.
+              </p>
+              <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
+                {[
+                  "Compact 5cm design - perfect for any application",
+                  "Waterproof and durable construction",
+                  "Works with all NFC-enabled smartphones",
+                  "No apps required for emergency access",
+                  "Secure, encrypted data storage",
+                  "Made with top-of-the-line UV sunblock ink, meaning it's built to last.",
+                  "We added an anti-ferrite layer, which ensures it works on metal surfaces.",
+                ].map((feature, index) => (
+                  <div key={index} className="flex items-start space-x-3">
+                    <CheckCircle className="mt-1 h-4 w-4 sm:h-5 sm:w-5 text-emergency-red flex-shrink-0" />
+                    <span className="text-gray-700 text-sm sm:text-base leading-snug">
+                      {feature}
+                    </span>
+                  </div>
+                ))}
+              </div>
+              <Button
+                className="bg-emergency-red hover:bg-emergency-red/90 w-full sm:w-auto"
+                asChild
+              >
+                <a
+                  href="https://83btej-r0.myshopify.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Shop NFC Emergency Contact Stickers
+                </a>
+              </Button>
+            </div>
           </div>
 
           {/* Pet Safety */}
           <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 mb-16 sm:mb-20">
-            <div className="animate-slide-up order-2 lg:order-none text-center lg:text-left">
+            <div className="animate-slide-up order-2 lg:order-none text-left">
               <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-dark-gray mb-4 sm:mb-6">
                 NFC Emergency Contact Dog Collar
               </h3>
@@ -334,7 +370,6 @@ export default function HomePage() {
                 collar on the market with an NFC tag securely embedded into the
                 collar itself — making it a smarter, safer solution.
               </p>
-
               <div className="bg-green-50 border border-green-200 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
                 <p className="text-green-800 font-semibold text-sm sm:text-base">
                   Only $20 on our KickStarter launch will be $25 after.
@@ -363,34 +398,6 @@ export default function HomePage() {
                   height={250}
                   className="relative rounded-3xl shadow-2xl w-full h-auto"
                 />
-              </div>
-            </div>
-          </div>
-
-          {/* Product Specifications */}
-          <div className="grid lg:grid-cols-1 gap-8 sm:gap-12">
-            <div className="animate-fade-in order-1 lg:order-none"></div>
-            <div className="animate-slide-up order-2 lg:order-none  lg:text-left">
-              <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-dark-gray mb-4 sm:mb-6">
-                Designed for Real-World Use
-              </h3>
-              <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
-                {[
-                  "Compact 4cm design - perfect for any application",
-                  "Waterproof and durable construction",
-                  "Works with all NFC-enabled smartphones",
-                  "No apps required for emergency access",
-                  "Secure, encrypted data storage",
-                  "Made with top-of-the-line UV sunblock ink, meaning it's built to last.",
-                  "We added an anti-ferrite layer, which ensures it works on metal surfaces.",
-                ].map((feature, index) => (
-                  <div key={index} className="flex items-start space-x-3">
-                    <CheckCircle className="mt-1 h-4 w-4 sm:h-5 sm:w-5 text-emergency-red flex-shrink-0" />
-                    <span className="text-gray-700 text-sm sm:text-base leading-snug">
-                      {feature}
-                    </span>
-                  </div>
-                ))}
               </div>
             </div>
           </div>

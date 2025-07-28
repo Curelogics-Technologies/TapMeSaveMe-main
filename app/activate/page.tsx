@@ -63,9 +63,9 @@ export default function ActivatePage() {
                   },
                   {
                     step: "4",
-                    title: "Keep It Accessible",
+                    title: "You're All Set",
                     description:
-                      "Attach the tag to your child’s belongings, pet collar, or keychain to ensure it's always within reach in an emergency.",
+                      "Your child, pet, or loved one is now covered in case of an emergency. TapMeSaveMe™ gives you a little more peace of mind as your family goes about life’s adventures.",
                   },
                 ].map((item, index) => (
                   <div key={index} className="text-center">
@@ -129,14 +129,14 @@ export default function ActivatePage() {
 
           {/* Info Cards */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            <div className="bg-blue-50 rounded-xl p-6 hover:shadow-md transition-shadow animate-fade-in">
+            <div className="bg-red-50 rounded-xl p-6 hover:shadow-md transition-shadow animate-fade-in">
               <div className="flex items-start space-x-3">
-                <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <Smartphone className="h-5 w-5 text-blue-600" />
+                <div className="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Smartphone className="h-5 w-5 text-red-600" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-blue-800 mb-2">No App Required!</h3>
-                  <p className="text-blue-700 text-sm leading-relaxed">
+                  <h3 className="font-semibold text-red-800 mb-2">No App Required!</h3>
+                  <p className="text-red-700 text-sm leading-relaxed">
                     Once activated, anyone can tap your tag with their phone to instantly access your emergency
                     information. No special apps or downloads needed!
                   </p>
@@ -145,16 +145,16 @@ export default function ActivatePage() {
             </div>
 
             <div
-              className="bg-green-50 rounded-xl p-6 hover:shadow-md transition-shadow animate-fade-in"
+              className="bg-red-50 rounded-xl p-6 hover:shadow-md transition-shadow animate-fade-in"
               style={{ animationDelay: "0.2s" }}
             >
               <div className="flex items-start space-x-3">
-                <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <Shield className="h-5 w-5 text-green-600" />
+                <div className="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Shield className="h-5 w-5 text-red-600" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-green-800 mb-2">Secure & Private</h3>
-                  <p className="text-green-700 text-sm leading-relaxed">
+                  <h3 className="font-semibold text-red-800 mb-2">Secure & Private</h3>
+                  <p className="text-red-700 text-sm leading-relaxed">
                     Your information is encrypted and only accessible when someone taps your tag. You control what
                     information is shared.
                   </p>
@@ -178,9 +178,6 @@ export default function ActivatePage() {
                   <div className="text-red-700 text-sm space-y-1">
                     <p>
                       <strong>Email:</strong> support@tapmesaveme.com
-                    </p>
-                    <p>
-                      <strong>Phone:</strong> 1-502-314-6453
                     </p>
                   </div>
                 </div>

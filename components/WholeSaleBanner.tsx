@@ -14,10 +14,9 @@ export function WholesaleBanner() {
           INTERESTED IN WHOLESALE OR RETAIL ORDERS?
         </h1>
         <p className="text-lg sm:text-xl text-black mb-4 max-w-xl mx-auto">
-          Are you a school, retailer, or distributor looking to place a bulk
-          order (500+ units)? We'd love to connect.
+          If you're a retailer, distributor, school, or daycare interested in carrying TapMeSaveMe™, contact us for specialized pricing on bulk orders.
         </p>
-        <div className="flex justify-center items-center mb-6">
+        {/* <div className="flex justify-center items-center mb-6">
           <Image
             src="/Logo.png" // Replace with the actual logo path
             alt="TapMeSaveMe Logo"
@@ -28,7 +27,7 @@ export function WholesaleBanner() {
           <h2 className="text-3xl sm:text-4xl font-bold text-black">
             TapMeSaveMe™
           </h2>
-        </div>
+        </div> */}
         {/* <button
           onClick={handleContactUsClick}
           className="w-auto bg-emergency-red hover:bg-emergency-red/90 text-white px-4 py-2 rounded-md font-medium text-sm text-center transition-colors focus:outline-none"
