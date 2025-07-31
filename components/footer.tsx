@@ -81,7 +81,7 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="https://83btej-r0.myshopify.com/"
+                  href="https://store.tapmesaveme.com/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-600 hover:text-dark-gray transition-colors text-sm sm:text-base"

@@ -6,7 +6,7 @@ export default function OrderButton() {
       <button
         className="w-full bg-emergency-red hover:bg-emergency-red/90 text-white px-4 py-2 rounded-md font-medium text-sm text-center transition-colors focus:outline-none"
         onClick={() =>
-          window.open("https://83btej-r0.myshopify.com/", "_blank")
+          window.open("https://store.tapmesaveme.com/", "_blank")
         }
       >
         Order Now
