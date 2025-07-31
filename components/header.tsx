@@ -107,7 +107,7 @@ export function Header() {
           <button
             className="hidden md:inline-flex bg-emergency-red hover:bg-emergency-red/90 text-white px-4 py-2 rounded-md font-medium text-sm lg:text-base transition-colors focus:outline-none"
             onClick={() =>
-              window.open("https://store.tapmesaveme.com/", "_blank")
+              window.open("https://shop.tapmesaveme.com/", "_blank")
             }
           >
             Order Now
@@ -189,7 +189,7 @@ export function Header() {
                 <button
                   className="w-full bg-emergency-red hover:bg-emergency-red/90 text-white px-4 py-2 rounded-md font-medium text-sm transition-colors focus:outline-none"
                   onClick={() => {
-                    window.open("https://store.tapmesaveme.com/", "_blank");
+                    window.open("https://shop.tapmesaveme.com/", "_blank");
                     setIsMenuOpen(false); // Close menu on click
                   }}
                 >

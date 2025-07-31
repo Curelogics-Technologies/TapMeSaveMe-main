@@ -114,7 +114,7 @@ export default function HomePage() {
                   asChild
                 >
                   <a
-                    href="https://store.tapmesaveme.com/"
+                    href="https://shop.tapmesaveme.com/"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -192,7 +192,7 @@ export default function HomePage() {
                 asChild
               >
                 <a
-                  href="https://store.tapmesaveme.com/"
+                  href="https://shop.tapmesaveme.com/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -227,7 +227,7 @@ export default function HomePage() {
                 asChild
               >
                 <a
-                  href="https://store.tapmesaveme.com/"
+                  href="https://shop.tapmesaveme.com/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -286,7 +286,7 @@ export default function HomePage() {
                 asChild
               >
                 <a
-                  href="https://store.tapmesaveme.com/"
+                  href="https://shop.tapmesaveme.com/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -341,7 +341,7 @@ export default function HomePage() {
                 asChild
               >
                 <a
-                  href="https://store.tapmesaveme.com/"
+                  href="https://shop.tapmesaveme.com/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -380,7 +380,7 @@ export default function HomePage() {
                 asChild
               >
                 <a
-                  href="https://store.tapmesaveme.com/"
+                  href="https://shop.tapmesaveme.com/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
