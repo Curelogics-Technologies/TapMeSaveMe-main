@@ -518,11 +518,11 @@ export default function AffiliatePage() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="p-4 sm:p-5 space-y-4">
-                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                  <p className="text-sm text-blue-800 mb-3">
+                <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+                  <p className="text-sm text-red-800 mb-3">
                     Our program is powered by <strong>GoAffPro</strong>, a trusted affiliate platform that tracks all your clicks, referrals, and commissions in real time. You'll have access to your own dashboard, where you can:
                   </p>
-                  <ul className="text-sm text-blue-700 space-y-1 ml-4">
+                  <ul className="text-sm text-red-700 space-y-1 ml-4">
                     <li>• Monitor your performance and earnings</li>
                     <li>• See exactly how many customers you've referred</li>
                     <li>• Create your own custom coupon code — if anyone uses it, you earn commission</li>
