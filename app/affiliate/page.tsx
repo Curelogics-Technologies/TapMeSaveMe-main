@@ -379,6 +379,7 @@ import {
   Mail,
   ExternalLink,
 } from "lucide-react";
+import Image from "next/image";
 
 export default function AffiliatePage() {
   const [email, setEmail] = useState("");
@@ -495,17 +496,16 @@ export default function AffiliatePage() {
           {/* Image and Form Section */}
           <div className="space-y-6 sm:space-y-8">
             {/* Image */}
-            <Card>
-              <CardContent className="p-4 sm:p-6">
-                <div className="w-full h-64 bg-gradient-to-br from-red-100 to-red-200 rounded-xl shadow-sm flex items-center justify-center">
-                  <div className="text-center">
-                    <Users className="h-16 w-16 text-red-600 mx-auto mb-4" />
-                    <h3 className="text-xl font-bold text-red-900 mb-2">Affiliate Program</h3>
-                    <p className="text-red-700">Join Our Growing Team</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+                         <Card className="animate-scale-in">
+               <CardContent className="p-4 sm:p-6">
+                 <Image
+                   src="/Affiliate.png?height=300&width=500"
+                   alt="Affiliate Program Promotion"
+                   width={500}
+                   height={300}
+                   className="rounded-xl shadow-sm w-full h-auto"
+                />              </CardContent>
+           </Card>
 
             {/* Updated Application Form */}
             <Card className="max-w-md lg:max-w-none mx-auto lg:mx-0">
