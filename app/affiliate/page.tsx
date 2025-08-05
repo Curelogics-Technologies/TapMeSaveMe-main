@@ -621,7 +621,7 @@ export default function AffiliatePage() {
               </CardContent>
             </Card>
 
-            {/* Questions Card */}
+            
             <Card>
               <CardContent className="pt-4 sm:pt-6">
                 <h3 className="font-semibold text-gray-900 mb-2 text-sm sm:text-base">
