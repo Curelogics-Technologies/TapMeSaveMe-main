@@ -25,10 +25,17 @@ export default function HomePage() {
   return (
     <div className="min-h-screen">
       {/* Kickstarter Launch Banner */}
-      <section className="bg-black text-white py-5 sm:py-7">
+      <section className="bg-black text-white py-3 sm:py-3">
         <div className="container mx-auto px-3 sm:px-4 lg:px-8 text-center">
           <p className="font-semibold animate-pulse whitespace-nowrap text-[clamp(0.9rem,4vw,1.5rem)]">
-            🚨 Launching on Kickstarter August 8th! 🚨
+            🚨 Pre-Sale is Live! 🚨
+          </p>
+        </div>
+      </section>
+      <section className="bg-white text-emergency-red py-3 sm:py-3">
+        <div className="container mx-auto px-3 sm:px-4 lg:px-8 text-center">
+          <p className="font-semibold whitespace-nowrap text-[clamp(0.9rem,4vw,1.5rem)]">
+            Save 20–40% with Early Bird Prices
           </p>
         </div>
       </section>
@@ -161,7 +168,7 @@ export default function HomePage() {
               <div className="relative max-w-sm mx-auto sm:max-w-md">
                 <div className="absolute inset-0 bg-gradient-to-r from-emergency-red/10 to-transparent rounded-3xl transform rotate-1"></div>
                 <Image
-                  src="/watchbatch.jpeg?height=250&width=350"
+                  src="/NFC-Bracelet.jpg?height=250&width=350"
                   alt="Child Safety NFC Tags"
                   width={350}
                   height={250}
@@ -181,10 +188,9 @@ export default function HomePage() {
                 designed for everyday adventures. Help your child stay safe
                 while staying stylish.
               </p>
-              <div className="bg-green-50 border border-green-200 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
-                <p className="text-green-800 font-semibold text-sm sm:text-base">
-                  Backed by the autism community! Only $15 on our KickStarter
-                  launch will be $19 after.
+              <div className="bg-red-50 border border-red-200 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
+                <p className="text-red-800 font-semibold text-sm sm:text-base">
+                  Backed by the autism community! Only $14.99 during our Pre-Sale launch — will be $18.99 after.
                 </p>
               </div>
               <Button
@@ -216,10 +222,9 @@ export default function HomePage() {
                 noticing. It’s ideal for kids with sensory sensitivities or
                 those who prefer not to wear a bracelet.
               </p>
-              <div className="bg-green-50 border border-green-200 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
-                <p className="text-green-800 font-semibold text-sm sm:text-base">
-                  Backed by the autism community! Only $15 on our KickStarter
-                  launch will be $19 after.
+              <div className="bg-red-50 border border-red-200 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
+                <p className="text-red-800 font-semibold text-sm sm:text-base">
+                  Backed by the autism community! Only $14.99 during our Pre-Sale launch — will be $18.99 after.
                 </p>
               </div>
               <Button
@@ -239,7 +244,7 @@ export default function HomePage() {
               <div className="relative max-w-sm mx-auto sm:max-w-md">
                 <div className="absolute inset-0 bg-gradient-to-r from-emergency-red/10 to-transparent rounded-3xl transform rotate-1"></div>
                 <Image
-                  src="/tag.jpeg?height=250&width=350"
+                  src="/NFC-Pin.jpg?height=250&width=350"
                   alt="Child Safety NFC Tags"
                   width={350}
                   height={250}
@@ -276,9 +281,9 @@ export default function HomePage() {
                 could use a little extra protection — all at an affordable
                 price.
               </p>
-              <div className="bg-green-50 border border-green-200 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
-                <p className="text-green-800 font-semibold text-sm sm:text-base">
-                  Only $7 on our KickStarter launch will be $11 after.
+              <div className="bg-red-50 border border-red-200 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
+                <p className="text-red-800 font-semibold text-sm sm:text-base">
+                  Backed by the autism community! Only $6.99 during our Pre-Sale launch — will be $11.99 after.
                 </p>
               </div>
               <Button
@@ -370,9 +375,9 @@ export default function HomePage() {
                 collar on the market with an NFC tag securely embedded into the
                 collar itself — making it a smarter, safer solution.
               </p>
-              <div className="bg-green-50 border border-green-200 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
-                <p className="text-green-800 font-semibold text-sm sm:text-base">
-                  Only $20 on our KickStarter launch will be $25 after.
+              <div className="bg-red-50 border border-red-200 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
+                <p className="text-red-800 font-semibold text-sm sm:text-base">
+                  Backed by the autism community! Only $19.99 during our Pre-Sale launch — will be $24.99 after.
                 </p>
               </div>
               <Button
@@ -392,7 +397,7 @@ export default function HomePage() {
               <div className="relative max-w-sm mx-auto sm:max-w-md">
                 <div className="absolute inset-0 bg-gradient-to-r from-emergency-red/10 to-transparent rounded-3xl transform rotate-2"></div>
                 <Image
-                  src="/Pet.png?height=250&width=350"
+                  src="/Dog-Collar.jpg?height=250&width=350"
                   alt="Smart Pet Collar with NFC"
                   width={350}
                   height={250}

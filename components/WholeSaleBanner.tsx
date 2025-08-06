@@ -14,7 +14,7 @@ export function WholesaleBanner() {
           INTERESTED IN WHOLESALE OR RETAIL ORDERS?
         </h1>
         <p className="text-lg sm:text-xl text-black mb-4 max-w-xl mx-auto">
-          If you're a retailer, distributor, school, or daycare interested in carrying TapMeSaveMe™, contact us for specialized pricing on bulk orders.
+          If you're a retailer, distributor, fundraiser, school, or daycare interested in carrying TapMeSaveMe™, contact us for specialized pricing on bulk orders.
         </p>
         {/* <div className="flex justify-center items-center mb-6">
           <Image

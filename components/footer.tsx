@@ -63,6 +63,22 @@ export function Footer() {
               >
                 <Linkedin className="h-7 w-7 sm:h-8 sm:w-8 text-[#0077B5]" />
               </a>
+              <a
+                href="https://www.youtube.com/@tapmesaveme"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-600 hover:text-dark-gray transition-colors"
+                aria-label="Follow us on YouTube"
+              >
+                <svg
+                  className="h-8 w-8 sm:h-9 sm:w-9 text-[#FF0000]"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M23.498 6.186a2.935 2.935 0 0 0-2.065-2.075C19.79 3.5 12 3.5 12 3.5s-7.79 0-9.433.611a2.935 2.935 0 0 0-2.065 2.075A30.15 30.15 0 0 0 0 12a30.15 30.15 0 0 0 .502 5.814 2.935 2.935 0 0 0 2.065 2.075C4.21 20.5 12 20.5 12 20.5s7.79 0 9.433-.611a2.935 2.935 0 0 0 2.065-2.075A30.15 30.15 0 0 0 24 12a30.15 30.15 0 0 0-.502-5.814zM9.75 15.02V8.98l6.25 3.02-6.25 3.02z" />
+                </svg>
+              </a>
+
             </div>
           </div>
 
