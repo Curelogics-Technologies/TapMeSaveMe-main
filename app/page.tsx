@@ -48,8 +48,7 @@ export default function HomePage() {
               Get 10% OFF + Early Access
             </h2>
             <p className="text-sm sm:text-lg text-white/90 mb-6 sm:mb-8">
-              Subscribe now to receive your discount code and be the first to
-              know when we go live on Kickstarter!
+             Subscribe now to receive your discount code and join the TapMeSaveMe movement.
             </p>
             <NewsletterForm
               textColor="text-red"
@@ -375,11 +374,11 @@ export default function HomePage() {
                 collar on the market with an NFC tag securely embedded into the
                 collar itself — making it a smarter, safer solution.
               </p>
-              <div className="bg-red-50 border border-red-200 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
+              {/* <div className="bg-red-50 border border-red-200 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
                 <p className="text-red-800 font-semibold text-sm sm:text-base">
                   Backed by the autism community! Only $19.99 during our Pre-Sale launch — will be $24.99 after.
                 </p>
-              </div>
+              </div> */}
               <Button
                 className="bg-emergency-red hover:bg-emergency-red/90 w-full sm:w-auto"
                 asChild
