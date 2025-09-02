@@ -16,6 +16,7 @@ import {
   Linkedin,
 } from "lucide-react";
 import { NewsletterForm } from "@/components/NewsletterForm";
+import VideoEmbed from "@/components/EmbedVideo";
 
 const handleContactUsClick = () => {
   window.location.href = "mailto:founder@tapmesaveme.com";
@@ -24,21 +25,6 @@ const handleContactUsClick = () => {
 export default function HomePage() {
   return (
     <div className="min-h-screen">
-      {/* Kickstarter Launch Banner */}
-      <section className="bg-black text-white py-3 sm:py-3">
-        <div className="container mx-auto px-3 sm:px-4 lg:px-8 text-center">
-          <p className="font-semibold animate-pulse whitespace-nowrap text-[clamp(0.9rem,4vw,1.5rem)]">
-            🚨 Pre-Sale is Live! 🚨
-          </p>
-        </div>
-      </section>
-      <section className="bg-white text-emergency-red py-3 sm:py-3">
-        <div className="container mx-auto px-3 sm:px-4 lg:px-8 text-center">
-          <p className="font-semibold whitespace-nowrap text-[clamp(0.9rem,4vw,1.5rem)]">
-            Save 20–40% with Early Bird Prices
-          </p>
-        </div>
-      </section>
 
       {/* Top Newsletter Section */}
       <section className="bg-emergency-red py-8 sm:py-12">
@@ -147,6 +133,10 @@ export default function HomePage() {
       </section>
 
       <WholesaleBanner />
+      <section className="py-16 sm:py-20 bg-gray-50">
+        <h1 className="font-semibold mb-4 text-center text-2xl sm:text-3xl lg:text-4xl xl:text-5xl">Watch the Main Video</h1>
+        <VideoEmbed fileId="1a-MUVBb4CJk2s25PcB0zrOW8rID_1e9k" rounded={false} />
+      </section>
 
       {/* Product Showcase */}
       <section id="features" className="py-16 sm:py-20 bg-gray-50">
@@ -156,18 +146,18 @@ export default function HomePage() {
               See TapMeSaveMe™ in Action
             </h2>
             <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
-              These are the real-world ways our smart tags protect who matters
+              These are the real-world ways our smart tags protect who matters. Please check out the video below so you can see how easily you can program your new product
               most.
             </p>
           </div>
-
+          <VideoEmbed fileId="1v5u6MPxBHEhcf7-nacNhHeAcEY8xmoOZ" />
           {/* Children Safety */}
-          <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 mb-16 sm:mb-20">
+          <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 mb-16 sm:mb-20 mt-8">
             <div className="animate-fade-in order-1 lg:order-none">
               <div className="relative max-w-sm mx-auto sm:max-w-md">
                 <div className="absolute inset-0 bg-gradient-to-r from-emergency-red/10 to-transparent rounded-3xl transform rotate-1"></div>
                 <Image
-                  src="/NFC-Bracelet.jpg?height=250&width=350"
+                  src="/BrInfograph1_JPEG-01.jpg?height=250&width=350"
                   alt="Child Safety NFC Tags"
                   width={350}
                   height={250}
@@ -187,13 +177,12 @@ export default function HomePage() {
                 designed for everyday adventures. Help your child stay safe
                 while staying stylish.
               </p>
-              <div className="bg-red-50 border border-red-200 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
-                <p className="text-red-800 font-semibold text-sm sm:text-base">
-                  Backed by the autism community! Only $14.99 during our Pre-Sale launch — will be $18.99 after.
-                </p>
-              </div>
+              <p className="text-dark-gray font-semibold mb-3">
+                Click here to see the Child Safety Bracelet in action.
+              </p>
+              <VideoEmbed fileId="17mWnXHePmosL6L3jjyEuR_hc_AAIUMCT" />
               <Button
-                className="bg-emergency-red hover:bg-emergency-red/90 w-full sm:w-auto"
+                className="bg-emergency-red hover:bg-emergency-red/90 w-full sm:w-auto mt-2"
                 asChild
               >
                 <a
@@ -221,13 +210,12 @@ export default function HomePage() {
                 noticing. It’s ideal for kids with sensory sensitivities or
                 those who prefer not to wear a bracelet.
               </p>
-              <div className="bg-red-50 border border-red-200 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
-                <p className="text-red-800 font-semibold text-sm sm:text-base">
-                  Backed by the autism community! Only $14.99 during our Pre-Sale launch — will be $18.99 after.
-                </p>
-              </div>
+              <p className="text-dark-gray font-semibold mb-3">
+                Click here to see the Child Safety Pin in action.
+              </p>
+              <VideoEmbed fileId="1dWYEfo9ESGCtZWAfltHypEOvqKfWtL9U" />
               <Button
-                className="bg-emergency-red hover:bg-emergency-red/90 w-full sm:w-auto"
+                className="bg-emergency-red hover:bg-emergency-red/90 w-full sm:w-auto mt-2"
                 asChild
               >
                 <a
@@ -280,13 +268,12 @@ export default function HomePage() {
                 could use a little extra protection — all at an affordable
                 price.
               </p>
-              <div className="bg-red-50 border border-red-200 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
-                <p className="text-red-800 font-semibold text-sm sm:text-base">
-                  Backed by the autism community! Only $6.99 during our Pre-Sale launch — will be $11.99 after.
-                </p>
-              </div>
+              <p className="text-dark-gray font-semibold mb-3">
+                Click here to see the NFC Emergency Contact Sticker in action.
+              </p>
+              <VideoEmbed fileId="1vaQRfwHIfprgff3nCi0L_Rrs3Ds-EzKF" />
               <Button
-                className="bg-emergency-red hover:bg-emergency-red/90 w-full sm:w-auto"
+                className="bg-emergency-red hover:bg-emergency-red/90 w-full sm:w-auto mt-2"
                 asChild
               >
                 <a
@@ -379,8 +366,12 @@ export default function HomePage() {
                   Backed by the autism community! Only $19.99 during our Pre-Sale launch — will be $24.99 after.
                 </p>
               </div> */}
+              <p className="text-dark-gray font-semibold mb-3">
+                Click here to see the NFC Emergency Contact Sticker in action.
+              </p>
+              <VideoEmbed fileId="16mAJcU1LFKDWM4f3ceh6JHb2ys4fCAbN" />
               <Button
-                className="bg-emergency-red hover:bg-emergency-red/90 w-full sm:w-auto"
+                className="bg-emergency-red hover:bg-emergency-red/90 w-full sm:w-auto mt-2"
                 asChild
               >
                 <a

@@ -215,7 +215,7 @@ export default function ContactForm() {
                                     </div>
                                 </div>
 
-                                <div className="flex items-start space-x-4">
+                                {/* <div className="flex items-start space-x-4">
                                     <MapPin className="h-6 w-6 text-emergency-red mt-1" />
                                     <div>
                                         <h3 className="font-semibold text-dark-gray">Address</h3>
@@ -227,7 +227,7 @@ export default function ContactForm() {
                                             United States
                                         </p>
                                     </div>
-                                </div>
+                                </div> */}
 
                                 <div className="flex items-start space-x-4">
                                     <Clock className="h-6 w-6 text-emergency-red mt-1" />

@@ -99,7 +99,6 @@ export async function POST(request: NextRequest) {
             </div>
             <div class="footer">
               <p><strong>TapMeSaveMe</strong></p>
-              <p>7703 Nevia Way, Louisville, Kentucky 40220, United States</p>
               <p><a href="mailto:support@tapmesaveme.com">support@tapmesaveme.com</a> | 1-502-314-6453</p>
               <p><a href="#">Unsubscribe from these emails</a></p>
             </div>
