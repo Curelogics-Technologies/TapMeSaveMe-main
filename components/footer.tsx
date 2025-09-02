@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Facebook, Instagram, Linkedin } from "lucide-react";
+import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
 import Image from "next/image";
 
 export function Footer() {
@@ -62,6 +62,15 @@ export function Footer() {
                 aria-label="Follow us on LinkedIn"
               >
                 <Linkedin className="h-7 w-7 sm:h-8 sm:w-8 text-[#0077B5]" />
+              </a>
+              <a
+                href="https://x.com/TapMeSaveMe?t=1v_7l6xoczCmKS0DK2oYAA&s=09"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-600 hover:text-dark-gray transition-colors"
+                aria-label="Follow us on Twitter"
+              >
+                <Twitter className="h-7 w-7 sm:h-8 sm:w-8 text-[#1DA1F2]" />
               </a>
               <a
                 href="https://www.youtube.com/@tapmesaveme"
@@ -169,7 +178,58 @@ export function Footer() {
           <p className="text-xs sm:text-sm">
             © {new Date().getFullYear()} TapMeSaveMe. All rights reserved.
           </p>
+
+          {/* Mobile layout */}
+          {/* Mobile layout */}
+          <div className="flex sm:hidden items-center justify-center gap-3 mt-2">
+            {/* Logo */}
+            <Image
+              src="/Curelogics pic 2.jpg"
+              alt="CureLogics Logo"
+              width={40}
+              height={40}
+              className="w-10 h-auto object-contain rounded-xl"
+            />
+
+            {/* Text stacked */}
+            <div className="flex flex-col items-start text-left">
+              <span className="text-xs">Developed by</span>
+              <a
+                href="https://curelogics.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs font-medium text-dark-gray hover:underline"
+              >
+                CureLogics
+              </a>
+            </div>
+          </div>
+
+
+          {/* Desktop layout */}
+          <div className="hidden sm:flex justify-center items-center gap-2 mt-2">
+            <span className="text-xs sm:text-sm">Developed by</span>
+            <Image
+              src="/Curelogics pic 2.jpg"
+              alt="CureLogics Logo"
+              width={25}
+              height={25}
+              className="w-5 h-auto object-contain rounded-md"
+            />
+            <a
+              href="https://curelogics.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs sm:text-sm font-medium text-dark-gray hover:underline"
+            >
+              CureLogics
+            </a>
+          </div>
+
         </div>
+
+
+
       </div>
     </footer>
   );
