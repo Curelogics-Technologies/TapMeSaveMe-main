@@ -134,8 +134,8 @@ export default function HomePage() {
 
       <WholesaleBanner />
       <section className="py-16 sm:py-20 bg-gray-50">
-        <h1 className="font-semibold mb-4 text-center text-2xl sm:text-3xl lg:text-4xl xl:text-5xl">Watch the Main Video</h1>
-        <VideoEmbed fileId="1a-MUVBb4CJk2s25PcB0zrOW8rID_1e9k" rounded={false} />
+        <h1 className="font-semibold mb-4 text-center text-2xl sm:text-3xl lg:text-4xl xl:text-5xl">The Video Below Features TapMeSaveMe's Mission</h1>
+        <VideoEmbed url="https://youtu.be/DX2bMl5sK_A?si=dIzBICsfr30N3Iaf" rounded={false} />
       </section>
 
       {/* Product Showcase */}
@@ -150,7 +150,7 @@ export default function HomePage() {
               most.
             </p>
           </div>
-          <VideoEmbed fileId="1v5u6MPxBHEhcf7-nacNhHeAcEY8xmoOZ" />
+          <VideoEmbed url="https://youtu.be/OCGiqgXQ_wE?si=Eqxnx_05Nhmrz-9X" />
           {/* Children Safety */}
           <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 mb-16 sm:mb-20 mt-8">
             <div className="animate-fade-in order-1 lg:order-none">
@@ -180,7 +180,7 @@ export default function HomePage() {
               <p className="text-dark-gray font-semibold mb-3">
                 Click here to see the Child Safety Bracelet in action.
               </p>
-              <VideoEmbed fileId="17mWnXHePmosL6L3jjyEuR_hc_AAIUMCT" />
+              <VideoEmbed url="https://youtu.be/r84D1TMWDss?si=-4BLQXAZJ4CHcMGa" />
               <Button
                 className="bg-emergency-red hover:bg-emergency-red/90 w-full sm:w-auto mt-2"
                 asChild
@@ -213,7 +213,7 @@ export default function HomePage() {
               <p className="text-dark-gray font-semibold mb-3">
                 Click here to see the Child Safety Pin in action.
               </p>
-              <VideoEmbed fileId="1dWYEfo9ESGCtZWAfltHypEOvqKfWtL9U" />
+              <VideoEmbed url="https://youtu.be/FCiWT_kZsDM?si=Ml3plRd5eGMgoZ2D" />
               <Button
                 className="bg-emergency-red hover:bg-emergency-red/90 w-full sm:w-auto mt-2"
                 asChild
@@ -271,7 +271,7 @@ export default function HomePage() {
               <p className="text-dark-gray font-semibold mb-3">
                 Click here to see the NFC Emergency Contact Sticker in action.
               </p>
-              <VideoEmbed fileId="1vaQRfwHIfprgff3nCi0L_Rrs3Ds-EzKF" />
+              <VideoEmbed url="https://youtu.be/9CdjafSQ0P0?si=GTUSrRJH47TuraNT" />
               <Button
                 className="bg-emergency-red hover:bg-emergency-red/90 w-full sm:w-auto mt-2"
                 asChild
@@ -369,7 +369,7 @@ export default function HomePage() {
               <p className="text-dark-gray font-semibold mb-3">
                 Click here to see the NFC Emergency Contact Sticker in action.
               </p>
-              <VideoEmbed fileId="16mAJcU1LFKDWM4f3ceh6JHb2ys4fCAbN" />
+              <VideoEmbed url="https://youtu.be/xjNJ-QxXGB0?si=EYYksd37v-v4zlEN" />
               <Button
                 className="bg-emergency-red hover:bg-emergency-red/90 w-full sm:w-auto mt-2"
                 asChild
