@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { email, password } = body;
 
-    // Validate input
+    // Validate 
     if (!email || !password) {
       console.error('❌ Missing email or password');
       return NextResponse.json({ error: 'Missing email or password' }, { status: 400 });
