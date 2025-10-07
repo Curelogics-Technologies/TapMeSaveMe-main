@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
   });
 
   try {
-    // Validate JWT_SECRET
+    // Validate 
     if (!process.env.JWT_SECRET) {
       console.error('❌ JWT_SECRET is not configured');
       return NextResponse.json({ error: 'Server configuration error' }, { status: 500 });
