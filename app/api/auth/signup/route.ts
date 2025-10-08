@@ -13,7 +13,6 @@ const transporter = nodemailer.createTransport({
     pass: process.env.SMTP_PASS,
   },
 });
-
 export async function POST(request: NextRequest) {
   console.log('🚀 Signup API called for /api/auth/signup');
   console.log('📝 Request Headers:', Object.fromEntries(request.headers));
