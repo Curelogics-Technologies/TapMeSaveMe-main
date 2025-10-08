@@ -159,7 +159,7 @@ export async function GET(request: NextRequest) {
   response.headers.set('Access-Control-Allow-Headers', '*');
   return response;
 }
-
+ 
 export async function PUT(request: NextRequest) {
   console.log('❌ Unsupported method PUT for /api/auth/signup');
   const response = NextResponse.json({ error: 'Method Not Allowed' }, { status: 405 });
