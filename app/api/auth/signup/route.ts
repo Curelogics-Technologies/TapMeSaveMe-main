@@ -83,10 +83,20 @@ export async function POST(request: NextRequest) {
       `,
     });
 
-    return NextResponse.json({ success: true, user: { uid: userDoc.id, email } });
+    // Set CORS headers to allow all origins, methods, and headers
+    const response = NextResponse.json({ success: true, user: { uid: userDoc.id, email } });
+
+    response.headers.set('Access-Control-Allow-Origin', '*');
+    response.headers.set('Access-Control-Allow-Methods', '*');
+    response.headers.set('Access-Control-Allow-Headers', '*');
+    response.headers.set('Access-Control-Max-Age', '86400'); // Cache preflight for 24 hours
+
+    return response;
   } catch (error: any) {
     console.error('Signup API error:', error);
-    return NextResponse.json(
+
+    // Set CORS headers for error response
+    const response = NextResponse.json(
       {
         success: false,
         error: error.message || 'Failed to sign up',
@@ -94,5 +104,25 @@ export async function POST(request: NextRequest) {
       },
       { status: 500 }
     );
+
+    response.headers.set('Access-Control-Allow-Origin', '*');
+    response.headers.set('Access-Control-Allow-Methods', '*');
+    response.headers.set('Access-Control-Allow-Headers', '*');
+    response.headers.set('Access-Control-Max-Age', '86400');
+
+    return response;
   }
+}
+
+// Handle OPTIONS for CORS
+export async function OPTIONS(request: NextRequest) {
+  const response = NextResponse.json({}, { status: 200 });
+
+  // Set CORS headers to allow all origins, methods, and headers
+  response.headers.set('Access-Control-Allow-Origin', '*');
+  response.headers.set('Access-Control-Allow-Methods', '*');
+  response.headers.set('Access-Control-Allow-Headers', '*');
+  response.headers.set('Access-Control-Max-Age', '86400'); 
+
+  return response;
 }
