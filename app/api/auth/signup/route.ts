@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { adminDb } from '@/lib/firebase-admin';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import nodemailer from 'nodemailer';
 import crypto from 'crypto';
 
@@ -13,6 +13,7 @@ const transporter = nodemailer.createTransport({
     pass: process.env.SMTP_PASS,
   },
 });
+
 export async function POST(request: NextRequest) {
   console.log('🚀 Signup API called for /api/auth/signup');
   console.log('📝 Request Headers:', Object.fromEntries(request.headers));
