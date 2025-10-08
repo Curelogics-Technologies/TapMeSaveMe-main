@@ -4,31 +4,45 @@ import bcrypt from 'bcryptjs';
 
 export const runtime = 'nodejs';
 
+const sanitizeInput = (input: string) => input.replace(/[<>{}]/g, '');
+
 // Handle POST requests
 export async function POST(request: NextRequest) {
+  const requestId = crypto.randomUUID();
   try {
     const { email, token, newPassword } = await request.json();
 
     // Validate input
     if (!email || !token || !newPassword) {
-      console.error('Missing email, token, or new password');
-      return NextResponse.json({ error: 'Missing email, token, or new password' }, { status: 400 });
+      console.error(`[${requestId}] Missing email, token, or new password`);
+      return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
-    if (newPassword.length < 6) {
-      console.error('New password too short:', newPassword.length);
-      return NextResponse.json({ error: 'New password must be at least 6 characters' }, { status: 400 });
+    if (newPassword.length < 8) {
+      console.error(`[${requestId}] New password too short: ${newPassword.length}`);
+      return NextResponse.json({ error: 'New password must be at least 8 characters' }, { status: 400 });
     }
+
+    // Validate token format
+    const isValidHex = /^[0-9a-fA-F]{64}$/.test(token);
+    if (!isValidHex) {
+      console.error(`[${requestId}] Invalid token format`);
+      return NextResponse.json({ error: 'Invalid reset link' }, { status: 400 });
+    }
+
+    // Sanitize inputs
+    const sanitizedEmail = sanitizeInput(email.trim().toLowerCase());
+    const sanitizedToken = sanitizeInput(token);
 
     // Check reset token
     const usersRef = adminDb.collection('users');
     const query = usersRef
-      .where('email', '==', email.trim().toLowerCase())
-      .where('resetToken', '==', token);
+      .where('email', '==', sanitizedEmail)
+      .where('resetToken', '==', sanitizedToken);
     const snapshot = await query.get();
 
     if (snapshot.empty) {
-      console.error('Invalid reset token or email:', email);
-      return NextResponse.json({ error: 'Invalid reset token or email' }, { status: 400 });
+      console.error(`[${requestId}] Invalid reset token or email: ${sanitizedEmail}`);
+      return NextResponse.json({ error: 'Invalid or expired reset link' }, { status: 400 });
     }
 
     const userDoc = snapshot.docs[0];
@@ -37,31 +51,34 @@ export async function POST(request: NextRequest) {
     // Check token expiration
     const expires = new Date(userData.resetTokenExpires);
     if (expires < new Date()) {
-      console.error('Reset token has expired for:', email);
-      return NextResponse.json({ error: 'Reset token has expired' }, { status: 400 });
+      console.error(`[${requestId}] Reset token has expired for: ${sanitizedEmail}`);
+      return NextResponse.json({ error: 'Invalid or expired reset link' }, { status: 400 });
     }
 
-    // Update password
+    // Update password in a transaction
     const passwordHash = await bcrypt.hash(newPassword, 10);
-    await userDoc.ref.update({
-      passwordHash,
-      resetToken: null,
-      resetTokenExpires: null,
+    await adminDb.runTransaction(async (transaction) => {
+      transaction.update(userDoc.ref, {
+        passwordHash,
+        resetToken: null,
+        resetTokenExpires: null,
+      });
     });
 
-    // Set CORS headers to allow only POST and OPTIONS
+    // Set CORS headers
+    const allowedOrigins = [process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'];
+    const origin = request.headers.get('origin') || '';
     const response = NextResponse.json({ success: true, message: 'Password reset successfully' });
 
-    response.headers.set('Access-Control-Allow-Origin', '*');
+    response.headers.set('Access-Control-Allow-Origin', allowedOrigins.includes(origin) ? origin : allowedOrigins[0]);
     response.headers.set('Access-Control-Allow-Methods', 'POST, OPTIONS');
     response.headers.set('Access-Control-Allow-Headers', '*');
-    response.headers.set('Access-Control-Max-Age', '86400'); // Cache preflight for 24 hours
+    response.headers.set('Access-Control-Max-Age', '86400');
 
     return response;
   } catch (error: any) {
-    console.error('Reset Password API error:', error);
+    console.error(`[${requestId}] Reset Password API error:`, error);
 
-    // Set CORS headers for error response
     const response = NextResponse.json(
       {
         success: false,
@@ -83,13 +100,10 @@ export async function POST(request: NextRequest) {
 // Handle OPTIONS for CORS
 export async function OPTIONS(request: NextRequest) {
   const response = NextResponse.json({}, { status: 200 });
-
-  // Set CORS headers to allow only POST and OPTIONS
   response.headers.set('Access-Control-Allow-Origin', '*');
   response.headers.set('Access-Control-Allow-Methods', 'POST, OPTIONS');
   response.headers.set('Access-Control-Allow-Headers', '*');
-  response.headers.set('Access-Control-Max-Age', '86400'); // Cache preflight for 24 hours
-
+  response.headers.set('Access-Control-Max-Age', '86400');
   return response;
 }
 

@@ -1,9 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { adminDb } from '@/lib/firebase-admin';
 
-export const runtime = 'nodejs';
-
-// Handle GET requests
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
@@ -12,39 +9,51 @@ export async function GET(request: NextRequest) {
 
     // Validate input
     if (!token || !email) {
-      console.error('Missing token or email');
+      console.error('Missing token or email', { token, email });
       return NextResponse.json({ error: 'Missing token or email' }, { status: 400 });
     }
 
+    const normalizedEmail = email.trim().toLowerCase();
+    console.log('Querying Firestore with:', { email: normalizedEmail, token });
+
     // Query Firestore for user
     const usersRef = adminDb.collection('users');
-    const query = usersRef
-      .where('email', '==', email.trim().toLowerCase())
-      .where('verificationToken', '==', token);
+    const query = usersRef.where('email', '==', normalizedEmail).where('verificationToken', '==', token);
     const snapshot = await query.get();
 
     if (snapshot.empty) {
-      console.error('Invalid verification token or email:', email);
+      // Check if email exists and is already verified
+      const emailQuery = usersRef.where('email', '==', normalizedEmail);
+      const emailSnapshot = await emailQuery.get();
+      if (!emailSnapshot.empty && emailSnapshot.docs[0].data().emailVerified) {
+        console.log('Email already verified:', normalizedEmail);
+        return NextResponse.json({ success: true, message: 'Email already verified' });
+      }
+      console.error('Invalid verification token or email:', normalizedEmail);
       return NextResponse.json({ error: 'Invalid verification token or email' }, { status: 400 });
     }
 
-    // Update user document
+    // Check if already verified
     const userDoc = snapshot.docs[0];
-    await userDoc.ref.update({ emailVerified: true, verificationToken: null });
+    const userData = userDoc.data();
+    if (userData.emailVerified) {
+      console.log('Email already verified:', normalizedEmail);
+      return NextResponse.json({ success: true, message: 'Email already verified' });
+    }
 
-    // Set CORS headers to allow only GET and OPTIONS
+    // Update user document
+    await userDoc.ref.update({ emailVerified: true });
+
+    console.log('Email verified for user:', normalizedEmail);
+
     const response = NextResponse.json({ success: true, message: 'Email verified successfully' });
-
     response.headers.set('Access-Control-Allow-Origin', '*');
     response.headers.set('Access-Control-Allow-Methods', 'GET, OPTIONS');
     response.headers.set('Access-Control-Allow-Headers', '*');
-    response.headers.set('Access-Control-Max-Age', '86400'); // Cache preflight for 24 hours
-
+    response.headers.set('Access-Control-Max-Age', '86400');
     return response;
   } catch (error: any) {
-    console.error('💥 Verify Email API error:', error);
-
-    // Set CORS headers for error response
+    console.error('Verify Email API error:', error, { stack: error.stack });
     const response = NextResponse.json(
       {
         success: false,
@@ -53,50 +62,19 @@ export async function GET(request: NextRequest) {
       },
       { status: 500 }
     );
-
     response.headers.set('Access-Control-Allow-Origin', '*');
     response.headers.set('Access-Control-Allow-Methods', 'GET, OPTIONS');
     response.headers.set('Access-Control-Allow-Headers', '*');
     response.headers.set('Access-Control-Max-Age', '86400');
-
     return response;
   }
 }
 
-// Handle OPTIONS for CORS
 export async function OPTIONS(request: NextRequest) {
   const response = NextResponse.json({}, { status: 200 });
-
-  // Set CORS headers to allow only GET and OPTIONS
   response.headers.set('Access-Control-Allow-Origin', '*');
   response.headers.set('Access-Control-Allow-Methods', 'GET, OPTIONS');
   response.headers.set('Access-Control-Allow-Headers', '*');
-  response.headers.set('Access-Control-Max-Age', '86400'); // Cache preflight for 24 hours
-
-  return response;
-}
-
-// Handle unsupported methods
-export async function POST(request: NextRequest) {
-  const response = NextResponse.json({ error: 'Method Not Allowed' }, { status: 405 });
-  response.headers.set('Access-Control-Allow-Origin', '*');
-  response.headers.set('Access-Control-Allow-Methods', 'GET, OPTIONS');
-  response.headers.set('Access-Control-Allow-Headers', '*');
-  return response;
-}
-
-export async function PUT(request: NextRequest) {
-  const response = NextResponse.json({ error: 'Method Not Allowed' }, { status: 405 });
-  response.headers.set('Access-Control-Allow-Origin', '*');
-  response.headers.set('Access-Control-Allow-Methods', 'GET, OPTIONS');
-  response.headers.set('Access-Control-Allow-Headers', '*');
-  return response;
-}
-
-export async function DELETE(request: NextRequest) {
-  const response = NextResponse.json({ error: 'Method Not Allowed' }, { status: 405 });
-  response.headers.set('Access-Control-Allow-Origin', '*');
-  response.headers.set('Access-Control-Allow-Methods', 'GET, OPTIONS');
-  response.headers.set('Access-Control-Allow-Headers', '*');
+  response.headers.set('Access-Control-Max-Age', '86400');
   return response;
 }

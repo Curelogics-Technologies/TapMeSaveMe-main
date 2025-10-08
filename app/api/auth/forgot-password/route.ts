@@ -47,7 +47,7 @@ export async function POST(request: NextRequest) {
     });
 
     // Send reset email
-    const resetUrl = `https://www.tapmesaveme.com/reset-password?token=${resetToken}&email=${encodeURIComponent(email)}`;
+    const resetUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/reset-password?token=${resetToken}&email=${encodeURIComponent(email)}`;
     await transporter.sendMail({
       from: process.env.FROM_EMAIL,
       to: email,

@@ -57,7 +57,7 @@ export async function POST(request: NextRequest) {
     });
 
     // Send verification email
-    const verificationUrl = `https://www.tapmesaveme.com/verify-email?token=${verificationToken}&email=${encodeURIComponent(email)}`;
+    const verificationUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/verify-email?token=${verificationToken}&email=${encodeURIComponent(email)}`;
     await transporter.sendMail({
       from: process.env.FROM_EMAIL,
       to: email,
