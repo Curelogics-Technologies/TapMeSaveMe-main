@@ -16,34 +16,21 @@ const transporter = nodemailer.createTransport({
 
 export async function POST(request: NextRequest) {
   console.log('🚀 Signup API called for /api/auth/signup');
-  console.log('📝 Request Headers:', Object.fromEntries(request.headers));
-  console.log('📝 Environment check:', {
-    hasSmtpHost: !!process.env.SMTP_HOST,
-    hasSmtpPort: !!process.env.SMTP_PORT,
-    hasSmtpSecure: !!process.env.SMTP_SECURE,
-    hasSmtpUser: !!process.env.SMTP_USER,
-    hasSmtpPass: !!process.env.SMTP_PASS,
-    hasFromEmail: !!process.env.FROM_EMAIL,
-    hasFirebaseProject: !!process.env.FIREBASE_PROJECT_ID,
-    hasFirebaseEmail: !!process.env.FIREBASE_CLIENT_EMAIL,
-    hasFirebaseKey: !!process.env.FIREBASE_PRIVATE_KEY,
-  });
 
   try {
     const { email, password, fullName } = await request.json();
-    console.log('🔍 Signup attempt for:', email);
 
     // Validate input
     if (!email || !password || !fullName) {
-      console.error('❌ Missing email, password, or full name');
+      console.error('Missing email, password, or full name');
       return NextResponse.json({ error: 'Missing email, password, or full name' }, { status: 400 });
     }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      console.error('❌ Invalid email format:', email);
+      console.error('Invalid email format:', email);
       return NextResponse.json({ error: 'Invalid email format' }, { status: 400 });
     }
     if (password.length < 6) {
-      console.error('❌ Password too short:', password.length);
+      console.error('Password too short:', password.length);
       return NextResponse.json({ error: 'Password must be at least 6 characters' }, { status: 400 });
     }
 
@@ -51,7 +38,7 @@ export async function POST(request: NextRequest) {
     const usersRef = adminDb.collection('users');
     const query = usersRef.where('email', '==', email.trim().toLowerCase());
     if (!(await query.get()).empty) {
-      console.error('❌ Email already exists:', email);
+      console.error('Email already exists:', email);
       return NextResponse.json({ error: 'Email already exists' }, { status: 400 });
     }
 
@@ -104,11 +91,11 @@ export async function POST(request: NextRequest) {
 
     console.log('✅ Signup successful for:', email);
 
-    // Set CORS headers to allow all origins, methods, and headers
+    // Set CORS headers to allow only POST and OPTIONS
     const response = NextResponse.json({ success: true, user: { uid: userDoc.id, email } });
 
     response.headers.set('Access-Control-Allow-Origin', '*');
-    response.headers.set('Access-Control-Allow-Methods', '*');
+    response.headers.set('Access-Control-Allow-Methods', 'POST, OPTIONS');
     response.headers.set('Access-Control-Allow-Headers', '*');
     response.headers.set('Access-Control-Max-Age', '86400'); // Cache preflight for 24 hours
 
@@ -127,7 +114,7 @@ export async function POST(request: NextRequest) {
     );
 
     response.headers.set('Access-Control-Allow-Origin', '*');
-    response.headers.set('Access-Control-Allow-Methods', '*');
+    response.headers.set('Access-Control-Allow-Methods', 'POST, OPTIONS');
     response.headers.set('Access-Control-Allow-Headers', '*');
     response.headers.set('Access-Control-Max-Age', '86400');
 
@@ -137,31 +124,27 @@ export async function POST(request: NextRequest) {
 
 // Handle OPTIONS for CORS
 export async function OPTIONS(request: NextRequest) {
-  console.log('📥 OPTIONS request received for /api/auth/signup');
-
   const response = NextResponse.json({}, { status: 200 });
 
-  // Set CORS headers to allow all origins, methods, and headers
+  // Set CORS headers to allow only POST and OPTIONS
   response.headers.set('Access-Control-Allow-Origin', '*');
-  response.headers.set('Access-Control-Allow-Methods', '*');
+  response.headers.set('Access-Control-Allow-Methods', 'POST, OPTIONS');
   response.headers.set('Access-Control-Allow-Headers', '*');
-  response.headers.set('Access-Control-Max-Age', '86400'); // Cache preflight for 24 hours
+  response.headers.set('Access-Control-Max-Age', '86400');
 
   return response;
 }
 
 // Handle unsupported methods
 export async function GET(request: NextRequest) {
-  console.log('❌ Unsupported method GET for /api/auth/signup');
   const response = NextResponse.json({ error: 'Method Not Allowed' }, { status: 405 });
   response.headers.set('Access-Control-Allow-Origin', '*');
   response.headers.set('Access-Control-Allow-Methods', 'POST, OPTIONS');
   response.headers.set('Access-Control-Allow-Headers', '*');
   return response;
 }
- 
+
 export async function PUT(request: NextRequest) {
-  console.log('❌ Unsupported method PUT for /api/auth/signup');
   const response = NextResponse.json({ error: 'Method Not Allowed' }, { status: 405 });
   response.headers.set('Access-Control-Allow-Origin', '*');
   response.headers.set('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -170,7 +153,6 @@ export async function PUT(request: NextRequest) {
 }
 
 export async function DELETE(request: NextRequest) {
-  console.log('❌ Unsupported method DELETE for /api/auth/signup');
   const response = NextResponse.json({ error: 'Method Not Allowed' }, { status: 405 });
   response.headers.set('Access-Control-Allow-Origin', '*');
   response.headers.set('Access-Control-Allow-Methods', 'POST, OPTIONS');

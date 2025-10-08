@@ -3,6 +3,8 @@ import { adminDb } from '@/lib/firebase-admin';
 import nodemailer from 'nodemailer';
 import crypto from 'crypto';
 
+export const runtime = 'nodejs';
+
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
   port: Number(process.env.SMTP_PORT),
@@ -13,12 +15,14 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+// Handle POST requests
 export async function POST(request: NextRequest) {
   try {
     const { email } = await request.json();
 
     // Validate input
     if (!email) {
+      console.error('Email required');
       return NextResponse.json({ error: 'Email required' }, { status: 400 });
     }
 
@@ -28,6 +32,7 @@ export async function POST(request: NextRequest) {
     const snapshot = await query.get();
 
     if (snapshot.empty) {
+      console.error('User not found:', email);
       return NextResponse.json({ error: 'User not found' }, { status: 404 });
     }
 
@@ -42,7 +47,7 @@ export async function POST(request: NextRequest) {
     });
 
     // Send reset email
-    const resetUrl = `http://localhost:3000/reset-password?token=${resetToken}&email=${encodeURIComponent(email)}`;
+    const resetUrl = `https://www.tapmesaveme.com/reset-password?token=${resetToken}&email=${encodeURIComponent(email)}`;
     await transporter.sendMail({
       from: process.env.FROM_EMAIL,
       to: email,
@@ -74,10 +79,19 @@ export async function POST(request: NextRequest) {
       `,
     });
 
-    return NextResponse.json({ success: true, message: 'Password reset email sent' });
+    // Set CORS headers to allow only POST and OPTIONS
+    const response = NextResponse.json({ success: true, message: 'Password reset email sent' });
+
+    response.headers.set('Access-Control-Allow-Origin', '*');
+    response.headers.set('Access-Control-Allow-Methods', 'POST, OPTIONS');
+    response.headers.set('Access-Control-Allow-Headers', '*');
+    response.headers.set('Access-Control-Max-Age', '86400'); // Cache preflight for 24 hours
+
+    return response;
   } catch (error: any) {
     console.error('Forgot Password API error:', error);
-    return NextResponse.json(
+
+    const response = NextResponse.json(
       {
         success: false,
         error: error.message || 'Failed to send reset email',
@@ -85,5 +99,50 @@ export async function POST(request: NextRequest) {
       },
       { status: 500 }
     );
+
+    response.headers.set('Access-Control-Allow-Origin', '*');
+    response.headers.set('Access-Control-Allow-Methods', 'POST, OPTIONS');
+    response.headers.set('Access-Control-Allow-Headers', '*');
+    response.headers.set('Access-Control-Max-Age', '86400');
+
+    return response;
   }
+}
+
+// Handle OPTIONS for CORS
+export async function OPTIONS(request: NextRequest) {
+  const response = NextResponse.json({}, { status: 200 });
+
+  // Set CORS headers to allow only POST and OPTIONS
+  response.headers.set('Access-Control-Allow-Origin', '*');
+  response.headers.set('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  response.headers.set('Access-Control-Allow-Headers', '*');
+  response.headers.set('Access-Control-Max-Age', '86400'); // Cache preflight for 24 hours
+
+  return response;
+}
+
+// Handle unsupported methods
+export async function GET(request: NextRequest) {
+  const response = NextResponse.json({ error: 'Method Not Allowed' }, { status: 405 });
+  response.headers.set('Access-Control-Allow-Origin', '*');
+  response.headers.set('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  response.headers.set('Access-Control-Allow-Headers', '*');
+  return response;
+}
+
+export async function PUT(request: NextRequest) {
+  const response = NextResponse.json({ error: 'Method Not Allowed' }, { status: 405 });
+  response.headers.set('Access-Control-Allow-Origin', '*');
+  response.headers.set('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  response.headers.set('Access-Control-Allow-Headers', '*');
+  return response;
+}
+
+export async function DELETE(request: NextRequest) {
+  const response = NextResponse.json({ error: 'Method Not Allowed' }, { status: 405 });
+  response.headers.set('Access-Control-Allow-Origin', '*');
+  response.headers.set('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  response.headers.set('Access-Control-Allow-Headers', '*');
+  return response;
 }

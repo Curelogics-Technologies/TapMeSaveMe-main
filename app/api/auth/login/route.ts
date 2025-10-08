@@ -1,6 +1,6 @@
 import { type NextRequest, NextResponse } from 'next/server';
 import { adminDb } from '@/lib/firebase-admin';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 // Explicitly define runtime (important for Vercel)
@@ -8,31 +8,20 @@ export const runtime = 'nodejs';
 
 // Handle POST requests
 export async function POST(request: NextRequest) {
-  console.log('🚀 Login API called');
-  console.log('📝 Environment check:', {
-    hasJWT: !!process.env.JWT_SECRET,
-    hasFirebaseProject: !!process.env.FIREBASE_PROJECT_ID,
-    hasFirebaseEmail: !!process.env.FIREBASE_CLIENT_EMAIL,
-    hasFirebaseKey: !!process.env.FIREBASE_PRIVATE_KEY,
-  });
 
   try {
-    // Validate 
     if (!process.env.JWT_SECRET) {
-      console.error('❌ JWT_SECRET is not configured');
+      console.error('JWT_SECRET is not configured');
       return NextResponse.json({ error: 'Server configuration error' }, { status: 500 });
     }
-    
+
     const body = await request.json();
     const { email, password } = body;
 
-    // Validate 
     if (!email || !password) {
-      console.error('❌ Missing email or password');
+      console.error('Missing email or password');
       return NextResponse.json({ error: 'Missing email or password' }, { status: 400 });
     }
-
-    console.log('🔍 Attempting login for:', email);
 
     // Query Firestore for user
     const usersRef = adminDb.collection('users');
@@ -40,7 +29,7 @@ export async function POST(request: NextRequest) {
     const snapshot = await query.get();
 
     if (snapshot.empty) {
-      console.error('❌ User not found:', email);
+      console.error('User not found:', email);
       return NextResponse.json({ error: 'User not found' }, { status: 404 });
     }
 
@@ -50,13 +39,13 @@ export async function POST(request: NextRequest) {
     // Verify password
     const passwordMatch = await bcrypt.compare(password, userData.passwordHash);
     if (!passwordMatch) {
-      console.error('❌ Invalid password for:', email);
+      console.error('Invalid password for:', email);
       return NextResponse.json({ error: 'Invalid password' }, { status: 401 });
     }
 
     // Check if email is verified
     if (!userData.emailVerified) {
-      console.error('❌ Email not verified:', email);
+      console.error('Email not verified:', email);
       return NextResponse.json({ error: 'Email not verified. Please check your inbox.' }, { status: 401 });
     }
 
@@ -69,14 +58,14 @@ export async function POST(request: NextRequest) {
 
     console.log('✅ Login successful for:', email);
 
-    // Set CORS headers to allow all origins, methods, and headers
+    // Set CORS headers to allow only POST and OPTIONS
     const response = NextResponse.json({
       success: true,
       user: { uid: userDoc.id, email: userData.email, token },
     });
 
     response.headers.set('Access-Control-Allow-Origin', '*');
-    response.headers.set('Access-Control-Allow-Methods', '*');
+    response.headers.set('Access-Control-Allow-Methods', 'POST, OPTIONS');
     response.headers.set('Access-Control-Allow-Headers', '*');
     response.headers.set('Access-Control-Max-Age', '86400'); // Cache preflight for 24 hours
 
@@ -95,7 +84,7 @@ export async function POST(request: NextRequest) {
     );
 
     response.headers.set('Access-Control-Allow-Origin', '*');
-    response.headers.set('Access-Control-Allow-Methods', '*');
+    response.headers.set('Access-Control-Allow-Methods', 'POST, OPTIONS');
     response.headers.set('Access-Control-Allow-Headers', '*');
     response.headers.set('Access-Control-Max-Age', '86400');
 
@@ -107,11 +96,36 @@ export async function POST(request: NextRequest) {
 export async function OPTIONS(request: NextRequest) {
   const response = NextResponse.json({}, { status: 200 });
 
-  // Set CORS headers to allow all origins, methods, and headers
+  // Set CORS headers to allow only POST and OPTIONS
   response.headers.set('Access-Control-Allow-Origin', '*');
-  response.headers.set('Access-Control-Allow-Methods', '*');
+  response.headers.set('Access-Control-Allow-Methods', 'POST, OPTIONS');
   response.headers.set('Access-Control-Allow-Headers', '*');
   response.headers.set('Access-Control-Max-Age', '86400'); // Cache preflight for 24 hours
 
+  return response;
+}
+
+// Handle unsupported methods
+export async function GET(request: NextRequest) {
+  const response = NextResponse.json({ error: 'Method Not Allowed' }, { status: 405 });
+  response.headers.set('Access-Control-Allow-Origin', '*');
+  response.headers.set('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  response.headers.set('Access-Control-Allow-Headers', '*');
+  return response;
+}
+
+export async function PUT(request: NextRequest) {
+  const response = NextResponse.json({ error: 'Method Not Allowed' }, { status: 405 });
+  response.headers.set('Access-Control-Allow-Origin', '*');
+  response.headers.set('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  response.headers.set('Access-Control-Allow-Headers', '*');
+  return response;
+}
+
+export async function DELETE(request: NextRequest) {
+  const response = NextResponse.json({ error: 'Method Not Allowed' }, { status: 405 });
+  response.headers.set('Access-Control-Allow-Origin', '*');
+  response.headers.set('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  response.headers.set('Access-Control-Allow-Headers', '*');
   return response;
 }
