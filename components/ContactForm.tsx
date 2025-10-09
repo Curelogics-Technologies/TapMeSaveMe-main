@@ -105,7 +105,7 @@ export default function ContactForm() {
                                             placeholder="Doe"
                                             value={formData.lastName}
                                             onChange={handleChange}
-                                            className="placeholder:text-gray-400" // Dim placeholder color
+                                            className="placeholder:text-gray-400" // Dim placeholder
                                         />
                                     </div>
                                 </div>
