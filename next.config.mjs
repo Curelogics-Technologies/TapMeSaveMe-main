@@ -8,16 +8,19 @@ const nextConfig = {
   },
   images: {
     domains: ['placeholder.svg'],
-    unoptimized: true, // Better for localhost development
+    unoptimized: true,
   },
   experimental: {
-    optimizeCss: false, // Faster builds on localhost
+    optimizeCss: false,
   },
-  // Better localhost performance
   swcMinify: false,
   compiler: {
     removeConsole: false,
   },
-}
+  webpack: (config) => {
+    config.output.hashFunction = 'xxhash64'; // Use a modern hash function
+    return config;
+  },
+};
 
-export default nextConfig
+export default nextConfig;
