@@ -36,7 +36,7 @@ interface UpdateTagData {
     status?: string;
 }
 
-export async function PATCH(
+export async function PUT(
     request: NextRequest,
     { params }: { params: { tagId: string } }
 ) {
