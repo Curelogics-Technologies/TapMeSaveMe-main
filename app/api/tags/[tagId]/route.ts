@@ -12,7 +12,7 @@ export async function OPTIONS() {
   return NextResponse.json({}, {
     headers: {
       'Access-Control-Allow-Origin': '*', // Adjust to specific origins in production
-      'Access-Control-Allow-Methods': 'GET, POST, PATCH, DELETE, OPTIONS',
+      'Access-Control-Allow-Methods': '*',
       'Access-Control-Allow-Headers': '*',
     },
   });
@@ -133,7 +133,7 @@ export async function PATCH(
     return NextResponse.json({ success: true, message: 'Tag updated successfully' }, {
       headers: {
         'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, PATCH, DELETE, OPTIONS',
+        'Access-Control-Allow-Methods': '*',
         'Access-Control-Allow-Headers': '*',
       },
     });
