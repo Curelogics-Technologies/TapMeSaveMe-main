@@ -61,7 +61,7 @@ export async function POST(request: NextRequest) {
     // Set CORS headers to allow only POST and OPTIONS
     const response = NextResponse.json({
       success: true,
-      user: { uid: userDoc.id, email: userData.email, token },
+      user: { uid: userDoc.id, email: userData.email, fullName: userData.fullName, token },
     });
 
     response.headers.set('Access-Control-Allow-Origin', '*');
