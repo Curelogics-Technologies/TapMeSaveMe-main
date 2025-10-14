@@ -7,6 +7,17 @@ interface JwtPayload {
   email: string;
 }
 
+// Handle CORS preflight
+export async function OPTIONS() {
+  return NextResponse.json({}, {
+    headers: {
+      'Access-Control-Allow-Origin': '*', // Adjust to specific origins in production
+      'Access-Control-Allow-Methods': 'GET, POST, PATCH, DELETE, OPTIONS',
+      'Access-Control-Allow-Headers': 'Authorization, Content-Type',
+    },
+  });
+}
+
 export async function POST(
   request: NextRequest,
   { params }: { params: { tagId: string } }
@@ -46,7 +57,13 @@ export async function POST(
       await adminDb.collection('tags').doc(tagId).update({ coManagers });
     }
 
-    return NextResponse.json({ success: true, coManagers });
+    return NextResponse.json({ success: true, coManagers }, {
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, PATCH, DELETE, OPTIONS',
+        'Access-Control-Allow-Headers': 'Authorization, Content-Type',
+      },
+    });
   } catch (error: any) {
     console.error('Add co-manager error:', error);
     return NextResponse.json({ error: 'Failed to add co-manager' }, { status: 500 });

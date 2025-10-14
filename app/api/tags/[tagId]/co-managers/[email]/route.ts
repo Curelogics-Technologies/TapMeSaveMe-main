@@ -7,6 +7,17 @@ interface JwtPayload {
   email: string;
 }
 
+// Handle CORS preflight
+export async function OPTIONS() {
+  return NextResponse.json({}, {
+    headers: {
+      'Access-Control-Allow-Origin': '*', // Adjust to specific origins in production
+      'Access-Control-Allow-Methods': 'GET, POST, PATCH, DELETE, OPTIONS',
+      'Access-Control-Allow-Headers': 'Authorization, Content-Type',
+    },
+  });
+}
+
 export async function DELETE(
   request: NextRequest,
   { params }: { params: { tagId: string; email: string } }
@@ -38,7 +49,13 @@ export async function DELETE(
     const updatedCoManagers = coManagers.filter((e: string) => e.toLowerCase() !== email.toLowerCase());
     await adminDb.collection('tags').doc(tagId).update({ coManagers: updatedCoManagers });
 
-    return NextResponse.json({ success: true, coManagers: updatedCoManagers });
+    return NextResponse.json({ success: true, coManagers: updatedCoManagers }, {
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, PATCH, DELETE, OPTIONS',
+        'Access-Control-Allow-Headers': 'Authorization, Content-Type',
+      },
+    });
   } catch (error: any) {
     console.error('Delete co-manager error:', error);
     return NextResponse.json({ error: 'Failed to delete co-manager' }, { status: 500 });

@@ -7,6 +7,17 @@ interface JwtPayload {
   email: string;
 }
 
+// Handle CORS preflight
+export async function OPTIONS() {
+  return NextResponse.json({}, {
+    headers: {
+      'Access-Control-Allow-Origin': '*', // Adjust to specific origins in production
+      'Access-Control-Allow-Methods': 'GET, POST, PATCH, DELETE, OPTIONS',
+      'Access-Control-Allow-Headers': 'Authorization, Content-Type',
+    },
+  });
+}
+
 export async function PATCH(
   request: NextRequest,
   { params }: { params: { tagId: string } }
@@ -47,7 +58,13 @@ export async function PATCH(
       activated: updatedActivated,
     });
 
-    return NextResponse.json({ success: true, status, activated: updatedActivated });
+    return NextResponse.json({ success: true, status, activated: updatedActivated }, {
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, PATCH, DELETE, OPTIONS',
+        'Access-Control-Allow-Headers': 'Authorization, Content-Type',
+      },
+    });
   } catch (error: any) {
     console.error('Change status error:', error);
     return NextResponse.json({ error: 'Failed to update status' }, { status: 500 });

@@ -7,6 +7,17 @@ interface JwtPayload {
   email: string;
 }
 
+// Handle CORS preflight
+export async function OPTIONS() {
+  return NextResponse.json({}, {
+    headers: {
+      'Access-Control-Allow-Origin': '*', // Adjust to specific origins in production
+      'Access-Control-Allow-Methods': 'GET, POST, PATCH, DELETE, OPTIONS',
+      'Access-Control-Allow-Headers': 'Authorization, Content-Type',
+    },
+  });
+}
+
 export async function PATCH(
   request: NextRequest,
   { params }: { params: { tagId: string } }
@@ -43,7 +54,13 @@ export async function PATCH(
     // Update productType
     await adminDb.collection('tags').doc(tagId).update({ productType });
 
-    return NextResponse.json({ success: true, productType });
+    return NextResponse.json({ success: true, productType }, {
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, PATCH, DELETE, OPTIONS',
+        'Access-Control-Allow-Headers': 'Authorization, Content-Type',
+      },
+    });
   } catch (error: any) {
     console.error('Change product type error:', error);
     return NextResponse.json({ error: 'Failed to update product type' }, { status: 500 });

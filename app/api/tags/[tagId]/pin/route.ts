@@ -8,6 +8,17 @@ interface JwtPayload {
   email: string;
 }
 
+// Handle CORS preflight
+export async function OPTIONS() {
+  return NextResponse.json({}, {
+    headers: {
+      'Access-Control-Allow-Origin': '*', // Adjust to specific origins in production
+      'Access-Control-Allow-Methods': 'PATCH, OPTIONS',
+      'Access-Control-Allow-Headers': 'Authorization, Content-Type',
+    },
+  });
+}
+
 export async function PATCH(
   request: NextRequest,
   { params }: { params: { tagId: string } }
@@ -68,7 +79,13 @@ export async function PATCH(
       'analytics.lastTapped': new Date().toISOString(),
     });
 
-    return NextResponse.json({ success: true, message: 'PIN updated successfully' });
+    return NextResponse.json({ success: true, message: 'PIN updated successfully' }, {
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'PATCH, OPTIONS',
+        'Access-Control-Allow-Headers': 'Authorization, Content-Type',
+      },
+    });
   } catch (error: any) {
     console.error('Change PIN error:', error);
     return NextResponse.json({ error: 'Failed to update PIN' }, { status: 500 });
