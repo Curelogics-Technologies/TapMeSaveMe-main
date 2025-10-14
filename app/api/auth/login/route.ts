@@ -53,7 +53,6 @@ export async function POST(request: NextRequest) {
     const token = jwt.sign(
       { uid: userDoc.id, email: userData.email },
       process.env.JWT_SECRET,
-      { expiresIn: '1h' }
     );
 
     console.log('✅ Login successful for:', email);
