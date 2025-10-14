@@ -14,7 +14,7 @@ export async function OPTIONS() {
     headers: {
       'Access-Control-Allow-Origin': '*', // Adjust to specific origins in production
       'Access-Control-Allow-Methods': 'PATCH, OPTIONS',
-      'Access-Control-Allow-Headers': 'Authorization, Content-Type',
+      'Access-Control-Allow-Headers': '*',
     },
   });
 }
@@ -83,7 +83,7 @@ export async function PATCH(
       headers: {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'PATCH, OPTIONS',
-        'Access-Control-Allow-Headers': 'Authorization, Content-Type',
+        'Access-Control-Allow-Headers': '*',
       },
     });
   } catch (error: any) {
