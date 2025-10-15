@@ -75,7 +75,7 @@ export default function ContactForm() {
                 </div>
 
                 <div className="grid lg:grid-cols-2 gap-12">
-                    {/* Contact Form */}
+                    {/* Contact */}
                     <Card className="animate-scale-in">
                         <CardHeader>
                             <CardTitle>Send us a Message</CardTitle>
