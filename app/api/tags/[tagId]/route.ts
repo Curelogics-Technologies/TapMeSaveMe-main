@@ -9,7 +9,7 @@ interface JwtPayload {
 
 // Common CORS headers
 const corsHeaders = {
-    'Access-Control-Allow-Origin': '*', // Replace with your mobile app's domain in production
+    'Access-Control-Allow-Origin': '*', 
     'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type, Authorization, Accept',
     'Access-Control-Max-Age': '86400',
