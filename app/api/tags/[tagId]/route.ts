@@ -63,9 +63,8 @@ export async function PATCH(
                 if (contact.relationship === 'Other' && (!contact.customRelationship || !contact.customRelationship.trim())) {
                     return NextResponse.json({ error: 'Custom relationship required for "Other"' }, { status: 400, headers: corsHeaders });
                 }
-                const cleanPhone = contact.phone.replace(/[^\d+]/g, '');
-                if (!cleanPhone.startsWith('+') || cleanPhone.substring(1).length < 7 || cleanPhone.substring(1).length > 15) {
-                    return NextResponse.json({ error: `Invalid phone number for contact ${contact.name}` }, { status: 400, headers: corsHeaders });
+                if (!contact.phone.trim()) {
+                    return NextResponse.json({ error: `Phone number for contact ${contact.name} cannot be empty`}, { status: 400, headers: corsHeaders });
                 }
             }
         }
