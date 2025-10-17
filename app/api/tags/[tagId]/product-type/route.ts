@@ -11,7 +11,7 @@ interface JwtPayload {
 export async function OPTIONS() {
   return NextResponse.json({}, {
     headers: {
-      'Access-Control-Allow-Origin': '*', // Adjust to specific origins in production
+      'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'GET, POST, PATCH, DELETE, OPTIONS',
       'Access-Control-Allow-Headers': '*',
     },
@@ -29,26 +29,52 @@ export async function PATCH(
     // Validate productType
     const validTypes = ['Unspecified', 'Bracelet', 'Sticker', 'Pet Collar', 'Pin'];
     if (!validTypes.includes(productType)) {
-      return NextResponse.json({ error: 'Invalid product type' }, { status: 400 });
+      return NextResponse.json({ error: 'Invalid product type' }, { 
+        status: 400,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+        }
+      });
     }
 
     // Verify JWT
     const authHeader = request.headers.get('Authorization');
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      return NextResponse.json({ error: 'Unauthorized' }, { 
+        status: 401,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+        }
+      });
     }
     const token = authHeader.replace('Bearer ', '');
     const decoded = jwt.verify(token, process.env.JWT_SECRET!) as JwtPayload;
-    const ownerEmail = decoded.email.toLowerCase();
+    const userEmail = decoded.email.trim().toLowerCase();
 
     // Get tag document
     const tagDoc = await adminDb.collection('tags').doc(tagId).get();
     if (!tagDoc.exists) {
-      return NextResponse.json({ error: 'Tag not found' }, { status: 404 });
+      return NextResponse.json({ error: 'Tag not found' }, { 
+        status: 404,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+        }
+      });
     }
     const tagData = tagDoc.data();
-    if (tagData?.ownerEmail.toLowerCase() !== ownerEmail) {
-      return NextResponse.json({ error: 'Unauthorized to modify tag' }, { status: 403 });
+
+    const ownerEmail = tagData?.ownerEmail?.trim().toLowerCase();
+    const coManagers: string[] = (tagData?.coManagers || []).map((email: string) => email.trim().toLowerCase());
+    const isOwner = ownerEmail === userEmail;
+    const isCoManager = coManagers.includes(userEmail);
+
+    if (!isOwner && !isCoManager) {
+      return NextResponse.json({ error: 'Unauthorized to modify tag' }, { 
+        status: 403,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+        }
+      });
     }
 
     // Update productType
@@ -63,6 +89,11 @@ export async function PATCH(
     });
   } catch (error: any) {
     console.error('Change product type error:', error);
-    return NextResponse.json({ error: 'Failed to update product type' }, { status: 500 });
+    return NextResponse.json({ error: 'Failed to update product type' }, { 
+      status: 500,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+      }
+    });
   }
 }
