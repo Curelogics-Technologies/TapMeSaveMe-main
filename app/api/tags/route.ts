@@ -3,7 +3,7 @@ import { adminDb } from '@/lib/firebase-admin';
 import jwt from 'jsonwebtoken';
 import { Query } from 'firebase-admin/firestore';
 
-export const dynamic = 'force-dynamic';
+export const dynamic = 'force-dynamic'; 
 
 interface TagData {
   tagId: string;
