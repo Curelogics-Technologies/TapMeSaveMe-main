@@ -24,6 +24,11 @@ interface TagData {
     tapCount: number;
     lastTapped: string;
   };
+  // Added optional fields based on schema
+  coManagers?: string[];
+  getUpdatesByEmail?: boolean;
+  productType?: string;
+  status?: string;
 }
 
 interface JwtPayload {
@@ -47,8 +52,11 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized: Invalid token' }, { status: 401 });
     }
 
+    const userEmail = decoded.email.trim().toLowerCase();
+
     // Build Firestore query
-    let query: Query = adminDb.collection('tags').where('ownerEmail', '==', decoded.email.trim().toLowerCase());
+    let query: Query = adminDb.collection('tags')
+      .where('ownerEmail', '==', userEmail);
 
     // Apply optional activated filter
     const activated = request.nextUrl.searchParams.get('activated');
@@ -56,11 +64,40 @@ export async function GET(request: NextRequest) {
       query = query.where('activated', '==', activated === 'true');
     }
 
-    const snapshot = await query.get();
-    const tags: TagData[] = snapshot.docs.map(doc => ({
-      ...doc.data(),
-      tagId: doc.id,
-    } as TagData));
+    const ownerSnapshot = await query.get();
+
+    // Fetch tags where user is a co-manager
+    const coManagerQuery: Query = adminDb.collection('tags')
+      .where('coManagers', 'array-contains', userEmail);
+
+    // Apply the same optional activated filter to co-manager query
+    let coManagerFilteredQuery = coManagerQuery;
+    if (activated !== null) {
+      coManagerFilteredQuery = coManagerQuery.where('activated', '==', activated === 'true');
+    }
+
+    const coManagerSnapshot = await coManagerFilteredQuery.get();
+
+    // Combine and dedupe results (using a Map by doc ID)
+    const tagsMap = new Map<string, TagData>();
+
+    ownerSnapshot.docs.forEach(doc => {
+      tagsMap.set(doc.id, {
+        ...doc.data(),
+        tagId: doc.id,
+      } as TagData);
+    });
+
+    coManagerSnapshot.docs.forEach(doc => {
+      if (!tagsMap.has(doc.id)) {
+        tagsMap.set(doc.id, {
+          ...doc.data(),
+          tagId: doc.id,
+        } as TagData);
+      }
+    });
+
+    const tags: TagData[] = Array.from(tagsMap.values());
 
     return NextResponse.json({
       success: true,
