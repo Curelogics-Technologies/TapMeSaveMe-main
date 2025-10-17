@@ -58,7 +58,7 @@ export default function ResetPasswordClient() {
       }
 
       setSuccess("Password reset successfully! Redirecting to login...");
-      setTimeout(() => router.push("/login"), 2000);
+      setTimeout(() => router.push("/"), 2000);
     } catch (err: any) {
       setError(err.message || "An error occurred");
     } finally {

@@ -29,6 +29,7 @@ interface TagData {
   getUpdatesByEmail?: boolean;
   productType?: string;
   status?: string;
+  role: 'owner' | 'coManager';
 }
 
 interface JwtPayload {
@@ -82,18 +83,29 @@ export async function GET(request: NextRequest) {
     const tagsMap = new Map<string, TagData>();
 
     ownerSnapshot.docs.forEach(doc => {
+      const data = doc.data();
       tagsMap.set(doc.id, {
-        ...doc.data(),
+        ...data,
         tagId: doc.id,
+        role: (data.ownerEmail?.trim().toLowerCase() === userEmail) ? 'owner' : 'coManager',
       } as TagData);
     });
 
     coManagerSnapshot.docs.forEach(doc => {
+      const data = doc.data();
+      const isOwner = (data.ownerEmail?.trim().toLowerCase() === userEmail);
       if (!tagsMap.has(doc.id)) {
         tagsMap.set(doc.id, {
-          ...doc.data(),
+          ...data,
           tagId: doc.id,
+          role: isOwner ? 'owner' : 'coManager',
         } as TagData);
+      } else {
+        // If already added as coManager but actually owner (unlikely, but handle), update role
+        const existing = tagsMap.get(doc.id);
+        if (existing && isOwner) {
+          existing.role = 'owner';
+        }
       }
     });
 
