@@ -25,6 +25,7 @@ export async function POST(req: NextRequest) {
     const token = authHeader.replace('Bearer ', '');
     const decoded = jwt.verify(token, process.env.JWT_SECRET!) as JwtPayload;
     const email = decoded.email.toLowerCase();
+    
     if (!email) {
       return NextResponse.json(
         { error: 'User email not found in token' },
@@ -32,25 +33,26 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Store or update FCM token in users collection
-    const userRef = adminDb.collection('users').doc(email);
-    const userDoc = await userRef.get();
-    let fcmTokens = [];
-    if (userDoc.exists) {
-      fcmTokens = userDoc.data()?.fcmTokens || [];
+    const usersRef = adminDb.collection('users');
+    const query = usersRef.where('email', '==', email);
+    const snapshot = await query.get();
+    
+    if (snapshot.empty) {
+      return NextResponse.json({ error: 'User not found' }, { status: 404 });
     }
-    // Add token if not already present (avoid duplicates)
+
+    const userDoc = snapshot.docs[0];
+    let fcmTokens = userDoc.data()?.fcmTokens || [];
+    
     if (!fcmTokens.includes(fcmToken)) {
       fcmTokens.push(fcmToken);
     }
-    await userRef.set(
-      {
-        email,
-        fcmTokens,
-        lastUpdated: new Date().toISOString(),
-      },
-      { merge: true }
-    );
+    await userDoc.ref.update({
+      fcmTokens,
+      lastUpdated: new Date().toISOString(),
+    });
+
+    console.log(`FCM Token added to user ${email}:`, fcmToken);
 
     return NextResponse.json({
       message: 'FCM token registered successfully',
