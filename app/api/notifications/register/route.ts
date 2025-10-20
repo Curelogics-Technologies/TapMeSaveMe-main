@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken';
 interface JwtPayload {
   uid: string;
   email: string;
-}
+} 
 
 export async function POST(req: NextRequest) {
   try {
