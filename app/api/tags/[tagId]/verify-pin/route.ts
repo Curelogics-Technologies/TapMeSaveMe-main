@@ -10,6 +10,16 @@ interface JwtPayload {
 
 export const dynamic = 'force-dynamic';
 
+export async function OPTIONS() {
+  return NextResponse.json({}, {
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'POST, OPTIONS',
+      'Access-Control-Allow-Headers': '*',
+    },
+  });
+}
+
 export async function POST(
   request: NextRequest,
   { params }: { params: { tagId: string } }
@@ -21,31 +31,73 @@ export async function POST(
     if (!pin || typeof pin !== 'string' || pin.length !== 4 || !/^\d{4}$/.test(pin)) {
       return NextResponse.json(
         { error: 'Invalid PIN: Must be exactly 4 digits' },
-        { status: 400 }
+        { 
+          status: 400,
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': '*',
+          },
+        }
       );
     }
 
     const authHeader = request.headers.get('Authorization');
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
-      return NextResponse.json({ error: 'Unauthorized: Missing or invalid token' }, { status: 401 });
+      return NextResponse.json(
+        { error: 'Unauthorized: Missing or invalid token' },
+        { 
+          status: 401,
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': '*',
+          },
+        }
+      );
     }
     const token = authHeader.replace('Bearer ', '');
     let decoded: JwtPayload;
     try {
       decoded = jwt.verify(token, process.env.JWT_SECRET!) as JwtPayload;
     } catch (err) {
-      return NextResponse.json({ error: 'Unauthorized: Invalid token' }, { status: 401 });
+      return NextResponse.json(
+        { error: 'Unauthorized: Invalid token' },
+        { 
+          status: 401,
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': '*',
+          },
+        }
+      );
     }
     const userEmail = decoded.email.trim().toLowerCase();
 
     const tagRef = adminDb.collection('tags').doc(tagId);
     const tagDoc = await tagRef.get();
     if (!tagDoc.exists) {
-      return NextResponse.json({ error: 'Tag not found' }, { status: 404 });
+      return NextResponse.json(
+        { error: 'Tag not found' },
+        { 
+          status: 404,
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': '*',
+          },
+        }
+      );
     }
     const tagData = tagDoc.data();
     if (!tagData?.pinHash) {
-      return NextResponse.json({ error: 'No PIN set for this tag' }, { status: 400 });
+      return NextResponse.json(
+        { error: 'No PIN set for this tag' },
+        { 
+          status: 400,
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': '*',
+          },
+        }
+      );
     }
 
     const ownerEmail = tagData.ownerEmail?.trim().toLowerCase();
@@ -53,7 +105,16 @@ export async function POST(
     const isOwner = ownerEmail === userEmail;
     const isCoManager = coManagers.includes(userEmail);
     if (!isOwner && !isCoManager) {
-      return NextResponse.json({ error: 'Unauthorized: Not owner or co-manager' }, { status: 403 });
+      return NextResponse.json(
+        { error: 'Unauthorized: Not owner or co-manager' },
+        { 
+          status: 403,
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': '*',
+          },
+        }
+      );
     }
 
     const isValid = await bcrypt.compare(pin, tagData.pinHash);
@@ -63,14 +124,31 @@ export async function POST(
     });
 
     if (!isValid) {
-      return NextResponse.json({ error: 'Invalid PIN' }, { status: 401 });
+      return NextResponse.json(
+        { error: 'Invalid PIN' },
+        { 
+          status: 401,
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': '*',
+          },
+        }
+      );
     }
 
-    return NextResponse.json({
-      success: true,
-      message: 'PIN verified successfully',
-      role: isOwner ? 'owner' : 'coManager',
-    });
+    return NextResponse.json(
+      {
+        success: true,
+        message: 'PIN verified successfully',
+        role: isOwner ? 'owner' : 'coManager',
+      },
+      {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Headers': '*',
+        },
+      }
+    );
 
   } catch (error: any) {
     console.error('PIN verification error:', error);
@@ -79,7 +157,13 @@ export async function POST(
         error: error.message || 'Failed to verify PIN',
         stack: process.env.NODE_ENV === 'development' ? error.stack : undefined,
       },
-      { status: 500 }
+      { 
+        status: 500,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Headers': '*',
+        },
+      }
     );
   }
 }
