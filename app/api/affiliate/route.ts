@@ -17,7 +17,6 @@ export async function POST(request: NextRequest) {
     const MAILCHIMP_SERVER_PREFIX = process.env.MAILCHIMP_SERVER_PREFIX
 
     if (!MAILCHIMP_API_KEY || !MAILCHIMP_AUDIENCE_ID || !MAILCHIMP_SERVER_PREFIX) {
-      console.log("Affiliate signup (demo mode):", { email })
       return NextResponse.json({ success: true })
     }
 

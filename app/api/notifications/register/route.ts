@@ -52,8 +52,6 @@ export async function POST(req: NextRequest) {
       lastUpdated: new Date().toISOString(),
     });
 
-    console.log(`FCM Token added to user ${email}:`, fcmToken);
-
     return NextResponse.json({
       message: 'FCM token registered successfully',
     });

@@ -31,7 +31,6 @@ const VerifyEmailClient = () => {
         }
       );
       const data = await response.json();
-      console.log("Verify email API response:", { status: response.status, data });
 
       if (response.ok && data.success) {
         setStatus("success");
@@ -61,7 +60,6 @@ const VerifyEmailClient = () => {
         body: JSON.stringify({ email }),
       });
       const data = await response.json();
-      console.log("Resend verification API response:", { status: response.status, data });
 
       if (response.ok && data.success) {
         setResendStatus("success");

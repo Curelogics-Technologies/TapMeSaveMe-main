@@ -15,7 +15,6 @@ const transporter = nodemailer.createTransport({
 });
 
 export async function POST(request: NextRequest) {
-  console.log('🚀 Signup API called for /api/auth/signup');
 
   try {
     const { email, password, fullName } = await request.json();
@@ -88,8 +87,6 @@ export async function POST(request: NextRequest) {
         </div>
       `,
     });
-
-    console.log('✅ Signup successful for:', email);
 
     // Set CORS headers to allow only POST and OPTIONS
     const response = NextResponse.json({ success: true, user: { uid: userDoc.id, email } });

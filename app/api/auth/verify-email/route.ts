@@ -14,7 +14,6 @@ export async function GET(request: NextRequest) {
     }
 
     const normalizedEmail = email.trim().toLowerCase();
-    console.log('Querying Firestore with:', { email: normalizedEmail, token });
 
     // Query Firestore for user
     const usersRef = adminDb.collection('users');
@@ -26,7 +25,6 @@ export async function GET(request: NextRequest) {
       const emailQuery = usersRef.where('email', '==', normalizedEmail);
       const emailSnapshot = await emailQuery.get();
       if (!emailSnapshot.empty && emailSnapshot.docs[0].data().emailVerified) {
-        console.log('Email already verified:', normalizedEmail);
         return NextResponse.json({ success: true, message: 'Email already verified' });
       }
       console.error('Invalid verification token or email:', normalizedEmail);
@@ -37,14 +35,11 @@ export async function GET(request: NextRequest) {
     const userDoc = snapshot.docs[0];
     const userData = userDoc.data();
     if (userData.emailVerified) {
-      console.log('Email already verified:', normalizedEmail);
       return NextResponse.json({ success: true, message: 'Email already verified' });
     }
 
     // Update user document
     await userDoc.ref.update({ emailVerified: true });
-
-    console.log('Email verified for user:', normalizedEmail);
 
     const response = NextResponse.json({ success: true, message: 'Email verified successfully' });
     response.headers.set('Access-Control-Allow-Origin', '*');

@@ -10,7 +10,6 @@ const sanitizeInput = (input: string) => input.replace(/[<>{}]/g, '');
 
 export async function POST(request: NextRequest) {
   const requestId = crypto.randomUUID();
-  console.log(`[${requestId}] Received change password request`);
 
   try {
     // Validate JWT_SECRET
@@ -27,7 +26,6 @@ export async function POST(request: NextRequest) {
     }
 
     const token = authHeader.replace('Bearer ', '');
-    console.log('TOKEN', token);
     let decodedToken;
     try {
       decodedToken = jwt.verify(token, process.env.JWT_SECRET);
@@ -112,8 +110,6 @@ export async function POST(request: NextRequest) {
         updatedAt: new Date().toISOString(),
       });
     });
-
-    console.log(`[${requestId}] Password changed successfully for: ${sanitizedEmail}`);
 
     const response = NextResponse.json({ success: true, message: 'Password changed successfully' });
     const allowedOrigins = [process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'];

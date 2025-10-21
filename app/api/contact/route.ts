@@ -21,7 +21,6 @@ export async function POST(request: NextRequest) {
     // Set SendGrid API
     // const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY
     // if (!SENDGRID_API_KEY) {
-    //   console.log("Contact form submission (demo mode):", formData)
     //   return NextResponse.json({ success: true })
     // }
     // sgMail.setApiKey(SENDGRID_API_KEY)

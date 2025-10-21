@@ -25,7 +25,6 @@ export async function POST(request: NextRequest) {
     }
 
     const normalizedEmail = email.trim().toLowerCase();
-    console.log('Resend verification requested for:', normalizedEmail);
 
     // Query Firestore for user
     const usersRef = adminDb.collection('users');
@@ -41,7 +40,6 @@ export async function POST(request: NextRequest) {
     const userData = userDoc.data();
 
     if (userData.emailVerified) {
-      console.log('Email already verified:', normalizedEmail);
       return NextResponse.json({ success: true, message: 'Email already verified' });
     }
 
@@ -70,8 +68,6 @@ export async function POST(request: NextRequest) {
         </div>
       `,
     });
-
-    console.log('Verification email resent for:', normalizedEmail, { verificationToken });
 
     const response = NextResponse.json({ success: true, message: 'Verification email resent successfully' });
     response.headers.set('Access-Control-Allow-Origin', '*');

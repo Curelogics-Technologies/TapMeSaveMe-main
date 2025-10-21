@@ -72,8 +72,6 @@ export async function PATCH(
     // 🚀 FIXED: SAFE CO-MANAGERS HANDLING
     const coManagers = Array.isArray(tagData.coManagers) ? tagData.coManagers : [];
     const recipients = [tagData.ownerEmail, ...coManagers];
-    
-    console.log(`📧 Notifying ${recipients.length} users:`, recipients);
 
     // 🚀 BATCH EXPO MESSAGES
     const expoMessages = [];
@@ -83,14 +81,11 @@ export async function PATCH(
       const userSnapshot = await userQuery.get();
       
       if (userSnapshot.empty) {
-        console.log(`⚠️ User not found: ${email}`);
         continue;
       }
 
       const userData = userSnapshot.docs[0].data();
       const fcmTokens = Array.isArray(userData.fcmTokens) ? userData.fcmTokens : [];
-      
-      console.log(`📱 Tokens for ${email}: ${fcmTokens.length}`);
 
       // ADD MESSAGES FOR EACH TOKEN
       for (const token of fcmTokens) {
@@ -107,8 +102,6 @@ export async function PATCH(
     // 🚀 SEND TO EXPO
     let notifiedCount = 0;
     if (expoMessages.length > 0) {
-      console.log(`📤 Sending ${expoMessages.length} notifications`);
-      
       const response = await fetch('https://exp.host/--/api/v2/push/send', {
         method: 'POST',
         headers: {
@@ -119,7 +112,6 @@ export async function PATCH(
       });
 
       const result = await response.json();
-      console.log('📨 Expo result:', result);
       notifiedCount = expoMessages.length;
     }
 

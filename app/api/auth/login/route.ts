@@ -55,8 +55,6 @@ export async function POST(request: NextRequest) {
       process.env.JWT_SECRET,
     );
 
-    console.log('✅ Login successful for:', email);
-
     // Set CORS headers to allow only POST and OPTIONS
     const response = NextResponse.json({
       success: true,
