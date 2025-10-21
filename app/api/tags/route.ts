@@ -24,7 +24,6 @@ interface TagData {
     tapCount: number;
     lastTapped: string;
   };
-  // Added optional fields based on schema
   coManagers?: string[];
   getUpdatesByEmail?: boolean;
   productType?: string;
@@ -37,12 +36,31 @@ interface JwtPayload {
   email: string;
 }
 
+export async function OPTIONS() {
+  return NextResponse.json({}, {
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, OPTIONS',
+      'Access-Control-Allow-Headers': '*',
+    },
+  });
+}
+
 export async function GET(request: NextRequest) {
   try {
     // Verify JWT
     const authHeader = request.headers.get('Authorization');
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
-      return NextResponse.json({ error: 'Unauthorized: Missing or invalid token' }, { status: 401 });
+      return NextResponse.json(
+        { error: 'Unauthorized: Missing or invalid token' },
+        { 
+          status: 401,
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': '*',
+          },
+        }
+      );
     }
 
     const token = authHeader.replace('Bearer ', '');
@@ -50,7 +68,16 @@ export async function GET(request: NextRequest) {
     try {
       decoded = jwt.verify(token, process.env.JWT_SECRET!) as JwtPayload;
     } catch (err) {
-      return NextResponse.json({ error: 'Unauthorized: Invalid token' }, { status: 401 });
+      return NextResponse.json(
+        { error: 'Unauthorized: Invalid token' },
+        { 
+          status: 401,
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': '*',
+          },
+        }
+      );
     }
 
     const userEmail = decoded.email.trim().toLowerCase();
@@ -111,11 +138,19 @@ export async function GET(request: NextRequest) {
 
     const tags: TagData[] = Array.from(tagsMap.values());
 
-    return NextResponse.json({
-      success: true,
-      data: tags,
-      count: tags.length,
-    });
+    return NextResponse.json(
+      {
+        success: true,
+        data: tags,
+        count: tags.length,
+      },
+      {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Headers': '*',
+        },
+      }
+    );
   } catch (error: any) {
     console.error('Error fetching tags:', error);
     return NextResponse.json(
@@ -124,7 +159,13 @@ export async function GET(request: NextRequest) {
         error: error.message || 'Failed to fetch tags',
         stack: process.env.NODE_ENV === 'development' ? error.stack : undefined,
       },
-      { status: 500 }
+      { 
+        status: 500,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Headers': '*',
+        },
+      }
     );
   }
 }
