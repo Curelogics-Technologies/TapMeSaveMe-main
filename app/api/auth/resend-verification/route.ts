@@ -64,7 +64,6 @@ export async function POST(request: NextRequest) {
           <p>If the button doesn't work, copy and paste this link into your browser:</p>
           <p><a href="${verificationLink}">${verificationLink}</a></p>
           <p style="color: #4b5563; font-size: 12px;">If you did not sign up for TapMeSaveMe, please ignore this email.</p>
-          <p style="color: #4b5563; font-size: 12px;">TapMeSaveMe™ | Your Safety, Our Priority</p>
           <div style="background-color: #1e293b; padding: 20px; display: flex; justify-content: flex-start; align-items: center;">
             <div style="width: 100px; height: 100px; border-radius: 8px; background-color: #ffffff; margin-right: 20px; margin-left: 30px;">
               <img src="https://activate.tapmesaveme.com/logo.png?height=70&width=80" alt="TapMeSaveMe Logo" style="max-width: 100px; height: auto; display: block; margin: 0px; border-radius: 10px;" />
@@ -119,4 +118,4 @@ export async function OPTIONS(request: NextRequest) {
   response.headers.set('Access-Control-Allow-Headers', '*');
   response.headers.set('Access-Control-Max-Age', '86400');
   return response;
-} 
+}
