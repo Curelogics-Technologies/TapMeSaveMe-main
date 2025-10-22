@@ -71,9 +71,18 @@ export async function POST(request: NextRequest) {
             </p>
             <p style="font-size: 14px; color: #666;">This link expires in 1 hour. If you didn't request a reset, ignore this email.</p>
           </div>
-          <div style="background-color: #1e293b; padding: 20px; text-align: center; color: #d1d5db;">
-            <p style="margin: 0 0 10px;">TapMeSaveMe™ | Your Safety, Our Priority</p>
-            <p style="margin: 0;"><a href="mailto:support@tapmesaveme.com" style="color: #60a5fa;">support@tapmesaveme.com</a></p>
+                    <div style="background-color: #1e293b; padding: 20px; display: flex; justify-content: flex-start; align-items: center;">
+            <div style="width: 100px; height: 100px; border-radius: 8px; background-color: #ffffff; margin-right: 20px; margin-left: 30px;">
+              <img src="https://activate.tapmesaveme.com/logo.png?height=70&width=80" alt="TapMeSaveMe Logo" style="max-width: 100px; height: auto; display: block; margin: 0px; border-radius: 10px;" />
+            </div>
+            <div style="margin-left: 40px; color: #d1d5db; margin-top: 5px;">
+              <p style="margin: 0 0 10px;">TapMeSaveMe™ | Your Safety, Our Priority</p>
+              <p style="margin: 0 0 10px;">
+                <a href="https://www.tapmesaveme.com" style="color: #60a5fa; text-decoration: none;">Visit our website</a> | 
+                <a href="mailto:support@tapmesaveme.com" style="color: #60a5fa; text-decoration: none;">Contact Support</a>
+              </p>
+              <p style="margin: 0;">© 2025 TapMeSaveMe. All rights reserved.</p>
+            </div>
           </div>
         </div>
       `,

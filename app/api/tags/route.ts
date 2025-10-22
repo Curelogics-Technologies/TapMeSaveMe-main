@@ -111,16 +111,18 @@ export async function GET(request: NextRequest) {
 
     ownerSnapshot.docs.forEach(doc => {
       const data = doc.data();
+      const normalizedOwnerEmail = data.ownerEmail?.trim().toLowerCase();
       tagsMap.set(doc.id, {
         ...data,
         tagId: doc.id,
-        role: (data.ownerEmail?.trim().toLowerCase() === userEmail) ? 'owner' : 'coManager',
+        role: (normalizedOwnerEmail === userEmail) ? 'owner' : 'coManager',
       } as TagData);
     });
 
     coManagerSnapshot.docs.forEach(doc => {
       const data = doc.data();
-      const isOwner = (data.ownerEmail?.trim().toLowerCase() === userEmail);
+      const normalizedOwnerEmail = data.ownerEmail?.trim().toLowerCase();
+      const isOwner = (normalizedOwnerEmail === userEmail);
       if (!tagsMap.has(doc.id)) {
         tagsMap.set(doc.id, {
           ...data,

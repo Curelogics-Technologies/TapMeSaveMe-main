@@ -73,66 +73,52 @@ export async function POST(
     const mailOptions = {
       from: process.env.FROM_EMAIL || 'noreply@tapmesaveme.com',
       to: email,
-      subject: '🚨 Your New TapMeSaveMe PIN',
+      subject: '🚨 Your New TapMeSaveMe™ PIN',
       html: `
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-          <meta charset="utf-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1">
-          <title>Your New TapMeSaveMe PIN</title>
-          <style>
-            body { font-family: Arial, Helvetica, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; }
-            .container { max-width: 600px; margin: 20px auto; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-            .header { background-color: #e02424; padding: 30px; text-align: center; border-top-left-radius: 8px; border-top-right-radius: 8px; }
-            .header h1 { color: #ffffff; font-size: 28px; margin: 0; }
-            .pin-section { background-color: #fff3cd; padding: 30px; text-align: center; border-bottom: 2px solid #ffeaa7; }
-            .pin { font-size: 48px; font-weight: bold; color: #e02424; letter-spacing: 10px; font-family: monospace; }
-            .content { padding: 30px; text-align: center; }
-            .content p { color: #1f2a44; line-height: 1.6; margin-bottom: 20px; }
-            .warning { background-color: #fef2f2; border-left: 4px solid #ef4444; padding: 15px; margin: 20px 0; }
-            .warning p { color: #dc2626; margin: 0; }
-            .footer { background-color: #1f2a44; color: #ffffff; padding: 20px; text-align: center; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px; }
-            .footer p { margin: 5px 0; font-size: 14px; }
-            .footer a { color: #10b981; text-decoration: none; }
-            @media only screen and (max-width: 600px) {
-              .pin { font-size: 36px; letter-spacing: 5px; }
-              .container { margin: 10px; }
-            }
-          </style>
-        </head>
-        <body>
-          <div class="container">
-            <div class="header">
-              <h1>🚨 NEW PIN GENERATED</h1>
+        <div style="font-family: Arial, Helvetica, sans-serif; line-height: 1.5; color: #333333;">
+          <!-- Content -->
+          <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 20px; border-radius: 8px;">
+            <h1 style="font-size: 24px; color: #D52D2D; margin-bottom: 20px;">Your New TapMeSaveMe™ PIN!</h1>
+            <p style="font-size: 16px; margin-bottom: 15px;">Hi,</p>
+            <p style="font-size: 16px; margin-bottom: 15px;">
+              Your new 4-digit PIN for tag <strong>${tagId}</strong> has been generated successfully.
+            </p>
+            <p style="font-size: 16px; margin-bottom: 15px;">
+              <strong>Your New PIN: ${newPin}</strong>
+            </p>
+            <p style="font-size: 16px; margin-bottom: 15px;">
+              To use your PIN:
+            </p>
+            <ul style="font-size: 16px; margin-bottom: 15px; padding-left: 20px;">
+              <li>Go to your tag's profile page</li>
+              <li>Click "Edit Information"</li>
+              <li>Enter this PIN: <strong>${newPin}</strong></li>
+              <li>Update your emergency information</li>
+            </ul>
+            <div style="text-align: center; margin-bottom: 20px;">
+              <a href="https://activate.tapmesaveme.com/t/${tagId}" style="display: inline-block; background-color: #D52D2D; color: #ffffff; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-size: 16px; font-weight: bold;">
+                Edit Your Profile
+              </a>
             </div>
-            <div class="pin-section">
-              <p style="font-size: 16px; color: #856404; margin-bottom: 15px;">Your new 4-digit PIN for tag <strong>${tagId}</strong></p>
-              <div class="pin">${newPin}</div>
+            <p style="font-size: 14px; color: #666666; margin-bottom: 0;">
+              <small>This PIN was generated because you requested to forget your previous PIN.</small>
+            </p>
+          </div>
+          <!-- Footer -->
+          <div style="background-color: #1e293b; padding: 20px; display: flex; justify-content: flex-start; align-items: center;">
+            <div style="width: 100px; height: 100px; border-radius: 8px; background-color: #ffffff; margin-right: 20px; margin-left: 30px;">
+              <img src="https://activate.tapmesaveme.com/logo.png?height=70&width=80" alt="TapMeSaveMe Logo" style="max-width: 100px; height: auto; display: block; margin: 0px; border-radius: 10px;" />
             </div>
-            <div class="content">
-              <h2 style="color: #1f2a44; margin-bottom: 20px;">How to Use Your New PIN</h2>
-              <p><strong>1.</strong> Go to your tag's profile page</p>
-              <p><strong>2.</strong> Click "Edit Information"</p>
-              <p><strong>3.</strong> Enter this PIN: <strong>${newPin}</strong></p>
-              <p><strong>4.</strong> Update your emergency information</p>
-              
-              <div class="warning">
-                <p><strong>⚠️ SECURITY NOTICE:</strong> This PIN expires in 24 hours. Change it immediately after use.</p>
-              </div>
-              
-              <p style="font-size: 14px; color: #6b7280;">
-                <em>This PIN was generated because you requested to forget your previous PIN.</em>
+            <div style="margin-left: 40px; color: #d1d5db; margin-top: 5px;">
+              <p style="margin: 0 0 10px;">TapMeSaveMe™ | Your Safety, Our Priority</p>
+              <p style="margin: 0 0 10px;">
+                <a href="https://www.tapmesaveme.com" style="color: #60a5fa; text-decoration: none;">Visit our website</a> | 
+                <a href="mailto:support@tapmesaveme.com" style="color: #60a5fa; text-decoration: none;">Contact Support</a>
               </p>
-            </div>
-            <div class="footer">
-              <p><strong>TapMeSaveMe Emergency System</strong></p>
-              <p><a href="mailto:support@tapmesaveme.com">support@tapmesaveme.com</a> | 1-502-314-6453</p>
-              <p><a href="https://activate.tapmesaveme.com">activate.tapmesaveme.com</a></p>
+              <p style="margin: 0;">© 2025 TapMeSaveMe. All rights reserved.</p>
             </div>
           </div>
-        </body>
-        </html>
+        </div>
       `,
     };
 
