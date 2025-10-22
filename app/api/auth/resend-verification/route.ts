@@ -119,4 +119,4 @@ export async function OPTIONS(request: NextRequest) {
   response.headers.set('Access-Control-Allow-Headers', '*');
   response.headers.set('Access-Control-Max-Age', '86400');
   return response;
-}
+} 
