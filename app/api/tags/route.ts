@@ -29,7 +29,7 @@ interface TagData {
   productType?: string;
   status?: string;
   role: 'owner' | 'coManager';
-}
+} 
 
 interface JwtPayload {
   uid: string;
