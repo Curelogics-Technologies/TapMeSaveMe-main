@@ -37,6 +37,7 @@ interface UpdateTagData {
     coManagers?: string[];
     productType?: string;
     status?: string;
+    tagName?: string;
 }
 
 export async function PATCH(
@@ -50,6 +51,10 @@ export async function PATCH(
         // Validate inputs
         if (data.fullName && !data.fullName.trim()) {
             return NextResponse.json({ error: 'Full name cannot be empty' }, { status: 400, headers: corsHeaders });
+        }
+
+        if (data.tagName !== undefined && !data.tagName.trim()) {
+            return NextResponse.json({ error: 'Tag name cannot be empty' }, { status: 400, headers: corsHeaders });
         }
 
         if (data.emergencyContacts) {
@@ -128,6 +133,10 @@ export async function PATCH(
         if (data.status) {
             updateData.status = data.status;
             updateData.activated = data.status === 'deactivated' ? false : true;
+        }
+
+        if (data.tagName !== undefined) {
+            updateData.tagName = data.tagName.trim();
         }
 
         // Update tag in Firestore
