@@ -143,6 +143,7 @@ export async function PATCH(
                 updateData.coManagers = [];
                 updateData.tagName = '';
             }
+            
         }
 
         if (data.tagName !== undefined) {
