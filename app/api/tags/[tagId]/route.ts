@@ -132,7 +132,17 @@ export async function PATCH(
         if (data.productType) updateData.productType = data.productType;
         if (data.status) {
             updateData.status = data.status;
-            updateData.activated = data.status === 'deactivated' ? false : true;
+            updateData.activated = data.status === 'deactivated' || data.status === 'lost' ? false : true;
+
+            if (data.status === 'lost') {
+                updateData.fullName = '';
+                updateData.emergencyContacts = [];
+                updateData.medicalNotes = '';
+                updateData.insuranceInfo = '';
+                updateData.additionalNotes = '';
+                updateData.coManagers = [];
+                updateData.tagName = '';
+            }
         }
 
         if (data.tagName !== undefined) {
