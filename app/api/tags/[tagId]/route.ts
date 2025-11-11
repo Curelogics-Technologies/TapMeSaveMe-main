@@ -117,37 +117,43 @@ export async function PATCH(
         const updateData: any = {
             'analytics.lastTapped': new Date().toISOString(),
         };
-        if (data.fullName) updateData.fullName = data.fullName;
-        if (data.emergencyContacts) {
-            updateData.emergencyContacts = data.emergencyContacts.map(contact => ({
-                name: contact.name,
-                phone: contact.phone,
-                relationship: contact.relationship === 'Other' ? contact.customRelationship : contact.relationship,
-            }));
-        }
-        if (data.medicalNotes !== undefined) updateData.medicalNotes = data.medicalNotes;
-        if (data.insuranceInfo !== undefined) updateData.insuranceInfo = data.insuranceInfo;
-        if (data.additionalNotes !== undefined) updateData.additionalNotes = data.additionalNotes;
-        if (data.coManagers) updateData.coManagers = data.coManagers.filter(email => email.trim() !== '');
-        if (data.productType) updateData.productType = data.productType;
-        if (data.status) {
-            updateData.status = data.status;
-            updateData.activated = data.status === 'deactivated' || data.status === 'lost' ? false : true;
 
-            if (data.status === 'lost') {
-                updateData.fullName = '';
-                updateData.emergencyContacts = [];
-                updateData.medicalNotes = '';
-                updateData.insuranceInfo = '';
-                updateData.additionalNotes = '';
-                updateData.coManagers = [];
-                updateData.tagName = '';
+        // Check if status is being set to 'lost' first
+        // If lost, wipe ALL sensitive data and ignore other field updates
+        if (data.status === 'lost') {
+            updateData.status = 'lost';
+            updateData.activated = false;
+            // Permanently wipe ALL sensitive data when tag is marked as lost
+            // This ensures the tag cannot reveal personal information if found by someone else
+            updateData.fullName = '';
+            updateData.emergencyContacts = [];
+            updateData.medicalNotes = '';
+            updateData.insuranceInfo = '';
+            updateData.additionalNotes = '';
+            updateData.coManagers = [];
+            updateData.tagName = '';
+        } else {
+            // Normal update flow for non-lost tags
+            if (data.fullName) updateData.fullName = data.fullName;
+            if (data.emergencyContacts) {
+                updateData.emergencyContacts = data.emergencyContacts.map(contact => ({
+                    name: contact.name,
+                    phone: contact.phone,
+                    relationship: contact.relationship === 'Other' ? contact.customRelationship : contact.relationship,
+                }));
             }
-            
-        }
-
-        if (data.tagName !== undefined) {
-            updateData.tagName = data.tagName.trim();
+            if (data.medicalNotes !== undefined) updateData.medicalNotes = data.medicalNotes;
+            if (data.insuranceInfo !== undefined) updateData.insuranceInfo = data.insuranceInfo;
+            if (data.additionalNotes !== undefined) updateData.additionalNotes = data.additionalNotes;
+            if (data.coManagers) updateData.coManagers = data.coManagers.filter(email => email.trim() !== '');
+            if (data.productType) updateData.productType = data.productType;
+            if (data.status) {
+                updateData.status = data.status;
+                updateData.activated = data.status === 'deactivated' ? false : true;
+            }
+            if (data.tagName !== undefined) {
+                updateData.tagName = data.tagName.trim();
+            }
         }
 
         // Update tag in Firestore
