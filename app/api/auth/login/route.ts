@@ -132,4 +132,4 @@ export async function DELETE(request: NextRequest) {
   response.headers.set('Access-Control-Allow-Methods', 'POST, OPTIONS');
   response.headers.set('Access-Control-Allow-Headers', '*');
   return response;
-}
+} 
