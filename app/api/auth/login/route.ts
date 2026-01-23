@@ -49,6 +49,13 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Email not verified. Please check your inbox.' }, { status: 401 });
     }
 
+    const lastLogin = new Date().toISOString();
+    try {
+      await userDoc.ref.update({ lastLogin });
+    } catch (updateError: any) {
+      console.error('Failed to update lastLogin:', updateError);
+    }
+
     // Generate JWT
     const token = jwt.sign(
       { uid: userDoc.id, email: userData.email },
@@ -58,7 +65,7 @@ export async function POST(request: NextRequest) {
     // Set CORS headers to allow only POST and OPTIONS
     const response = NextResponse.json({
       success: true,
-      user: { uid: userDoc.id, email: userData.email, fullName: userData.fullName, token },
+      user: { uid: userDoc.id, email: userData.email, fullName: userData.fullName, token, lastLogin },
     });
 
     response.headers.set('Access-Control-Allow-Origin', '*');
